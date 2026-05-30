@@ -102,7 +102,7 @@ export default function Impact() {
                   referrerPolicy="no-referrer"
                 />
              </div>
-             <div className="absolute -bottom-8 -left-8 p-8 bg-red-500 text-white rounded-3xl shadow-2xl">
+             <div className="relative mt-6 lg:absolute lg:-bottom-8 lg:-left-8 p-8 bg-red-500 text-white rounded-3xl shadow-2xl">
                 <p className="text-3xl font-black">20+</p>
                 <p className="text-xs font-bold uppercase tracking-widest">Cities Covered</p>
              </div>
