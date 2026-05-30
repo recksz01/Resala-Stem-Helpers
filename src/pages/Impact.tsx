@@ -93,25 +93,19 @@ export default function Impact() {
                 ))}
              </div>
           </div>
-          
-            <div className="flex-1 relative">
-  <div className="w-full aspect-[4/3] bg-brand-purple rounded-[3rem] shadow-2xl overflow-hidden">
-    <img
-      src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800"
-      alt="Students collaborating"
-      className="w-full h-full object-cover"
-    />
-  </div>
-
-  <div className="absolute -bottom-8 -left-8 p-8 bg-red-500 text-white rounded-3xl shadow-2xl">
-    <p className="text-3xl font-black">20+</p>
-    <p className="text-xs font-bold uppercase tracking-widest">
-      Cities Covered
-    </p>
-  </div>
-</div>
-
-          
+          <div className="flex-1 relative">
+             <div className="w-full aspect-[4/3] bg-brand-purple rounded-[3rem] rotate-3 shadow-2xl relative overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1523240715632-6104498a3581?auto=format&fit=crop&q=80&w=800" 
+                  alt="Students collaborating" 
+                  className="absolute inset-0 w-full h-full object-cover -rotate-3 scale-110"
+                  referrerPolicy="no-referrer"
+                />
+             </div>
+             <div className="absolute -bottom-8 -left-8 p-8 bg-red-500 text-white rounded-3xl shadow-2xl">
+                <p className="text-3xl font-black">20+</p>
+                <p className="text-xs font-bold uppercase tracking-widest">Cities Covered</p>
+             </div>
           </div>
         </div>
       </div>
