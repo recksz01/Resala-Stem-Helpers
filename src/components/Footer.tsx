@@ -37,7 +37,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-4">
                {[
-                 { icon: Facebook, href: "https://facebook.com/ResalaSTEM" },
+                 { icon: Facebook, href: "https://www.facebook.com/share/1DyskoD64R/" },
                  { icon: Youtube, href: "https://youtube.com/@resalastem-et5vd?si=c-HF-NEhKF4cmB8E" }
                ].map((social, i) => (
                  <a 
@@ -66,7 +66,7 @@ export default function Footer() {
             <h4 className="font-black mb-8 uppercase tracking-[0.2em] text-sm text-red-500">Connect</h4>
             <ul className="space-y-4 font-bold">
               <li><a href="mailto:fly2877@gmail.com" className="text-white/60 hover:text-white transition-colors">fly2877@gmail.com</a></li>
-              <li><a href="https://facebook.com/ResalaSTEM" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">Facebook</a></li>
+              <li><a href="https://www.facebook.com/share/1DyskoD64R/" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">Facebook</a></li>
               <li><a href="https://youtube.com/@resalastem-et5vd?si=c-HF-NEhKF4cmB8E" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">YouTube Channel</a></li>
               <li><span className="text-white/30 text-xs">Cairo, Egypt</span></li>
             </ul>
@@ -76,7 +76,7 @@ export default function Footer() {
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 text-white/20 text-[0.6rem] font-black uppercase tracking-[0.3em]">
           <p>© {currentYear} Resala STEM Helpers Organization.</p>
           <div className="flex items-center gap-2">
-            Developed with Integrity by <span className="text-white/60">Omar Sayed Haggag</span>
+            Developed with Integrity by <span className="text-white/60">Omar Sayed Haggag & Omar Afify </span>
           </div>
           <div className="flex items-center gap-1 group">
              Made with <Heart size={14} className="text-red-500 fill-red-500 group-hover:scale-125 transition-transform" /> in Egypt
