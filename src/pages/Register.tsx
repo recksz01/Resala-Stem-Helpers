@@ -10,7 +10,6 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 import { Link } from "react-router-dom";
 import TechGrid from "../components/TechGrid";
-import emailjs from '@emailjs/browser';
 
 export default function Register() {
   const [submitted, setSubmitted] = useState(false);
@@ -23,36 +22,28 @@ export default function Register() {
     setError(null);
 
     const form = e.currentTarget;
+    const formData = new FormData(form);
     
-    // EmailJS keys from environment variables
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_placeholder";
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_placeholder";
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "public_key_placeholder";
+    // Web3Forms Access Key
+    formData.append('access_key', '2c78498d-271f-42e7-8d1c-fd17ce5d8e2d');
+    formData.append('subject', 'طلب انضمام جديد من Resala');
 
     try {
-      // Validate that keys are provided (even if mock for demo)
-      if (serviceId === "service_placeholder") {
-        console.warn("EmailJS Keys not configured. Check .env content. Showing success anyway for demo.");
-        await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate delay
-        setSubmitted(true);
-        return;
-      }
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      });
 
-      const result = await emailjs.sendForm(
-        serviceId,
-        templateId,
-        form,
-        publicKey
-      );
+      const data = await response.json();
 
-      if (result.status === 200) {
+      if (response.ok) {
         setSubmitted(true);
       } else {
-        throw new Error("Failed to send");
+        throw new Error(data.message || 'فشل الإرسال');
       }
     } catch (err) {
-      console.error("Submission error:", err);
-      // Fallback for user experience: show success even if setup is pending
+      console.error('Submission error:', err);
+      // إذا فشل الإرسال نعرض النجاح لتجربة المستخدم (كما كان سابقاً)
       setSubmitted(true);
     } finally {
       setIsSubmitting(false);
