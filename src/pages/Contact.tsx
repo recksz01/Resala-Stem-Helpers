@@ -9,7 +9,7 @@ import { Mail, Phone, Facebook, Instagram, Linkedin, MapPin, Send } from "lucide
 
 export default function Contact() {
   const socials = [
-    { name: "Facebook", icon: Facebook, href: "https://fb.com/resalastem", color: "hover:bg-blue-500" },
+    { name: "Facebook", icon: Facebook, href: "https://www.facebook.com/share/1DyskoD64R/", color: "hover:bg-blue-500" },
   ];
 
   return (
@@ -45,7 +45,7 @@ export default function Contact() {
                       </div>
                       <div>
                         <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Call us</p>
-                        <p className="text-2xl font-black text-brand-purple hover:text-red-500 transition-colors">+20 155 060 2397</p>
+                        <p className="text-2xl font-black text-brand-purple hover:text-red-500 transition-colors">+20 10 30834588</p>
                       </div>
                    </div>
 
