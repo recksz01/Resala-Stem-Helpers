@@ -78,10 +78,11 @@ export default function Footer() {
           <div className="flex items-center gap-2">
             Developed with Integrity by <span className="text-white/60">Omar Sayed Haggag</span>
           </div>
-          <div className="flex items-center gap-1 group">
+          
           <div className="flex items-center gap-2">
-            Deployment assistance by <span className="text-white/60">Omar Afify</span>
+            Deployment Assistance by <span className="text-white/60">Omar Afify</span>
           </div>
+          
           <div className="flex items-center gap-1 group">
              Made with <Heart size={14} className="text-red-500 fill-red-500 group-hover:scale-125 transition-transform" /> in Egypt
           </div>
