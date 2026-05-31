@@ -80,32 +80,84 @@ export default function Impact() {
           ))}
         </div>
 
-        {/* Impact Story */}
-        <div className="mt-32 p-12 md:p-24 bg-slate-50 rounded-[4rem] border border-slate-100 flex flex-col lg:flex-row items-center gap-16">
-          <div className="flex-1">
-             <h2 className="text-4xl font-black text-brand-purple mb-6">More than just numbers</h2>
-             <p className="text-lg text-slate-600 leading-relaxed mb-8">
-               Every volunteer hour contributed is a seed planted for the future. We've seen our students secure international scholarships, excel in their academics, and launch their own technical ventures.
-             </p>
-             <div className="flex flex-wrap gap-4">
+        {/* Impact Story – القسم المعدل بالكامل */}
+        <div className="mt-32 p-12 md:p-24 bg-slate-50 rounded-[4rem] border border-slate-100">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            <div className="flex-1">
+              <h2 className="text-4xl font-black text-brand-purple mb-6">More than just numbers</h2>
+              <p className="text-lg text-slate-600 leading-relaxed mb-8">
+                Every volunteer hour contributed is a seed planted for the future. We've seen our students secure international scholarships, excel in their academics, and launch their own technical ventures.
+              </p>
+              <div className="flex flex-wrap gap-4">
                 {["Knowledge Shared", "Futures Built", "Mindsets Changed"].map(tag => (
                   <span key={tag} className="px-6 py-2 bg-white border border-slate-200 rounded-full text-slate-800 font-bold text-sm shadow-sm">{tag}</span>
                 ))}
-             </div>
-          </div>
-          <div className="flex-1 relative">
-             <div className="w-full aspect-[4/3] bg-brand-purple rounded-[3rem] rotate-3 shadow-2xl relative overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1523240715632-6104498a3581?auto=format&fit=crop&q=80&w=800" 
-                  alt="Students collaborating" 
-                  className="absolute inset-0 w-full h-full object-cover -rotate-3 scale-110"
-                  referrerPolicy="no-referrer"
-                />
-             </div>
-             <div className="absolute -bottom-8 -left-8 p-8 bg-red-500 text-white rounded-3xl shadow-2xl">
-                <p className="text-3xl font-black">20+</p>
-                <p className="text-xs font-bold uppercase tracking-widest">Cities Covered</p>
-             </div>
+              </div>
+            </div>
+            <div className="flex-1 w-full">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-[3rem] p-8 md:p-10 border border-slate-100 shadow-2xl relative overflow-hidden"
+              >
+                {/* Header */}
+                <div className="flex items-start justify-between mb-8">
+                  <div>
+                    <span className="text-red-500 text-[10px] font-black uppercase tracking-[0.2em] block mb-1">
+                      Volunteer Focus
+                    </span>
+                    <h3 className="text-2xl font-black text-brand-purple">
+                      Our Core Pillars of Support
+                    </h3>
+                  </div>
+                  <div className="bg-red-500/10 text-red-500 px-4 py-1.5 rounded-full font-black text-xs flex items-center gap-1.5">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                    </span>
+                    OUR METHOD
+                  </div>
+                </div>
+
+                {/* Progress Bars */}
+                <div className="space-y-6 mb-8">
+                  {[
+                    { region: "Scientific Research & STEM Competitions", hubs: "Mentorship & Projects", percentage: 95, color: "bg-brand-purple" },
+                    { region: "Coding, Robotics & Technology", hubs: "Practical Skills", percentage: 85, color: "bg-red-500" },
+                    { region: "Soft Skills, Leadership & Pitching", hubs: "Personal Development", percentage: 80, color: "bg-brand-purple" },
+                    { region: "University Admissions & Scholarships", hubs: "Futures & Careers", percentage: 70, color: "bg-red-500" },
+                  ].map((item, idx) => (
+                    <div key={idx} className="space-y-2">
+                      <div className="flex justify-between items-center text-sm font-bold text-slate-700">
+                        <span>{item.region}</span>
+                        <span className="text-xs font-black text-slate-400 uppercase tracking-wider">{item.hubs}</span>
+                      </div>
+                      <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${item.percentage}%` }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 1, delay: idx * 0.1, ease: "easeOut" }}
+                          className={`h-full ${item.color} rounded-full`}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Summary Banner */}
+                <div className="bg-brand-purple/5 border border-brand-purple/10 rounded-2xl p-4 flex items-center gap-4">
+                  <div className="w-12 h-12 bg-brand-purple rounded-xl flex items-center justify-center text-white font-black text-lg flex-shrink-0">
+                    100%
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-black text-brand-purple">Student-to-Student Mentorship</h4>
+                    <p className="text-xs text-slate-500 font-medium mt-0.5">Completely run by passionate youth leaders sharing peer-to-peer insights.</p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </div>
