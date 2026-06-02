@@ -24,14 +24,15 @@ import { Link } from "react-router-dom";
 import TechGrid from "../components/TechGrid";
 import FloatingIcons from "../components/FloatingIcons";
 
-// تأكد من نسخ الصورة الهولوجرامية (masar_cairo_hologram) إلى مجلد الـ assets لديك، أو استخدام مسارك المحلي
+// تأكد من نقل ملف الصورة الهولوجرامية الفاخرة إلى مجلد الصور لديك بنفس الاسم أو تحديث المسار
 import masarCairoHologram from "../assets/images/masar_cairo_hologram_1780432894344.png";
 
 export default function Home() {
-  // حساب المتبقي التنازلي لحدث "مسار القاهرة 2026"
+  // حساب الوقت المتبقي تنازلياً لحدث "مسار القاهرة 2026"
   const [timeLeft, setTimeLeft] = useState({ days: 22, hours: 3, minutes: 48, seconds: 34 });
 
   useEffect(() => {
+    // تحديد موعد انطلاق الحدث السنوي يوم 25 يونيو 2026 الساعة 9 صباحاً
     const eventDate = new Date("2026-06-25T09:00:00").getTime();
     
     const updateCountdown = () => {
@@ -162,9 +163,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* MASAR Event Banner Section */}
+      {/* MASAR Event Banner Section (قسم مؤتمر مسار الإبداعي) */}
       <section className="py-24 relative bg-slate-950 overflow-hidden border-y border-slate-900">
-        {/* تأثيرات لمعان ذكية في الخلفية لتعزيز الهوية المستقبلية */}
+        {/* توهجات خلفية محاكية لتصميم سفن الفضاء والتكنولوجيا الراقية */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(168,85,247,0.15),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(52,211,153,0.08),transparent_50%)]" />
         <div className="absolute -top-32 -left-32 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
@@ -177,14 +178,14 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 text-white rounded-[3rem] p-8 md:p-14 shadow-2xl relative overflow-hidden group"
           >
-            {/* الإضاءة الطرفية (Neon Borders) */}
+            {/* إضاءات خطية ناعمة جداً في حواف العنصر */}
             <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500/40 to-transparent" />
             <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
             
             <div className="relative z-10 flex flex-col lg:flex-row items-center gap-12 md:gap-16">
               <div className="flex-1 text-center lg:text-right" dir="rtl">
                 
-                {/* شارة إعلان الحدث السنوي */}
+                {/* شارة نيون ذكية مع أنيميشن النبض */}
                 <div className="inline-flex items-center gap-2.5 px-4.5 py-2 bg-purple-500/10 border border-purple-500/35 rounded-full text-xs font-black text-purple-300 mb-6 uppercase tracking-wider shadow-lg shadow-purple-950/45">
                   <span className="w-2 h-2 bg-emerald-400 rounded-full animate-ping" />
                   <span>الحدث السنوي الأكبر — مسار القاهرة 2026 (النسخة السابعة)</span>
@@ -198,7 +199,7 @@ export default function Home() {
                   يسر جمعيتنا دعوتكم لحضور مهرجان <strong className="text-purple-300 font-black">«مسار القاهرة»</strong> يوم <span className="font-bold border-b-2 border-purple-500/50 pb-0.5">25 / 6</span> على مسرح <span className="text-emerald-300 font-bold">الهوسابير العريق بالقاهرة</span>. حدث تفاعلي ملهم يقودك لعبور اختبارات القبول الدولية والحصول على تمويل دراسي بمشاركة أهم الخبراء الأكاديميين.
                 </p>
 
-                {/* العداد التنازلي المباشر (Countdown Timer Widget) */}
+                {/* العداد التنازلي التفاعلي المصمم بمهارة عالية */}
                 <div className="mb-10" dir="ltr">
                   <div className="flex flex-wrap lg:justify-start justify-center gap-4">
                     {[
@@ -264,7 +265,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* أزرار الحجز والتسجيل التفاعلية وتفاصيل المكان والزمان */}
+                {/* أزرار تفاعلية والربط المباشر بواتساب للحجز */}
                 <div className="flex flex-col sm:flex-row items-center justify-start gap-5">
                   <a
                     href="https://wa.me/201030834588"
@@ -277,7 +278,7 @@ export default function Home() {
                     <ArrowRight size={22} className="rotate-180 sm:rotate-0" />
                   </a>
                   
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-slate-400 mt-2 sm:mt-0 font-medium">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-slate-400 mt-2 sm:mt-0 font-medium font-sans">
                     <div className="flex items-center gap-2">
                       <Calendar size={18} className="text-rose-400 animate-pulse" />
                       <span className="text-sm font-bold text-slate-200">الخميس، 25 يونيو 2026</span>
@@ -291,7 +292,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* بطاقة الصورة الهولوجرامية التفاعلية */}
+              {/* بطاقة العرض البصري الهولوجرامي بالصورة الفاخرة */}
               <div className="w-full lg:w-96 shrink-0 flex flex-col items-center justify-center relative">
                 <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/20 via-pink-500/10 to-transparent rounded-[2.5rem] blur-2xl animate-pulse -z-10" />
                 
@@ -305,7 +306,7 @@ export default function Home() {
                   {/* فلتر الإضاءة النيون العلوي */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/15 to-transparent" />
                   
-                  {/* لوحة الملاحظات الشفافة أسفل الصورة (Glassmorphic) */}
+                  {/* لوحة الملاحظات الشفافة الزجاجية (Glassmorphic) */}
                   <div className="absolute bottom-4 inset-x-4 bg-slate-950/85 backdrop-blur-md border border-slate-800/80 rounded-2xl p-4 flex items-center justify-between shadow-xl" dir="rtl">
                     <div className="flex items-center gap-2">
                       <div className="w-2.5 h-2.5 bg-purple-500 rounded-full animate-ping" />
@@ -381,4 +382,4 @@ export default function Home() {
       </section>
     </div>
   );
-                        }
+      }
