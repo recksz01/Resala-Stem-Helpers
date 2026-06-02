@@ -1,16 +1,44 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl">
   <head> 
+    <!-- إثبات ملكية جوجل -->
     <meta name="google-site-verification" content="ZLRAEGKVj_HEalo-dFn6YuNnEo1e9D4KqFnStyXoJ-8" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Resala STEM Helpers | Egypt Hub </title>
-    <meta name="description" content="Resala STEM Helpers - منصة لمساعدة طلاب STEM في مصر">
-    <link rel="icon" type="image/png" href="/logo.png">
+    
+    <!-- العنوان الأساسي للمتصفحات ومحركات البحث -->
+    <title>Resala STEM Helpers | Egypt Hub</title>
+    <meta name="description" content="Resala STEM Helpers - منصة غنية لتبادل المعرفة ودعم طلاب STEM في مصر في مجالات البحث العلمي والتكنولوجيا.">
+    
+    <!-- وسوم الـ Open Graph (تُساعد جوجل وفيسبوك على فهم اسم ومحتوى موقعك بدقة) -->
+    <meta property="og:title" content="Resala STEM Helpers | Egypt Hub" />
+    <meta property="og:description" content="البوابة الرسمية لدعم وتوجيه طلاب STEM ومسابقات البحث العلمي والتكنولوجيا بمصر." />
+    <meta property="og:site_name" content="Resala STEM Helpers" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://resala-stem-helpers-nu.vercel.app/" />
+
+    <!-- ضبط الأيقونة (Favicon) لتتوافق مع معايير جوجل الصارمة -->
+    <!-- تأكد من أن ملف logo.png أبعاده مربعة تماماً (مثلاً: 512x512 أو 192x192 بكسل) وهي الصيغة المثالية لجوجل -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo.png">
+    <link rel="apple-touch-icon" href="/logo.png">
+
+    <!-- كود البيانات المنظمة (JSON-LD WebSite Structured Data) -->
+    <!-- هذا أهم كود يجعل جوجل يقرأ اسم الموقع "Resala STEM Helpers" صراحة بدلاً من Vercel -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Resala STEM Helpers",
+      "alternateName": [
+        "Resala STEM",
+        "STEM Helpers"
+      ],
+      "url": "https://resala-stem-helpers-nu.vercel.app/"
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-
