@@ -22,6 +22,16 @@
   50% { background-position: 100% 50%; }
 }
 
+@keyframes marquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+  will-change: transform;
+}
+
 .animate-gradient-x {
   background-size: 200% 200%;
   animation: gradient-x 5s ease infinite;
