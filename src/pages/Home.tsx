@@ -18,14 +18,116 @@ import {
   Award, 
   MapPin, 
   Globe, 
-  Clock 
+  Clock,
+  Trophy,
+  Crown,
+  Medal
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import TechGrid from "../components/TechGrid";
 import FloatingIcons from "../components/FloatingIcons";
 
-// هنا سطر استيراد صورتك بالاسم والمسار الذي حددته في مجلد src المحلي لديك
+// هنا سطر استيراد صورتك بالاسم والمسار لفعالية مسار القاهرة
 import masarCairoHologram from "../32813cf3-9243-4bf3-b670-622ba59e3e0c.png";
+
+// بيانات المبدعين المختارين كـ Best Members لشهر مايو 2026 لقائمة الشرف الدوارة
+const MAY_BEST_MEMBERS = [
+  {
+    name: "Jana Mustafa",
+    committee: "HR & Talent Development",
+    committeeAr: "الموارد البشرية",
+    roleAr: "بيست الـ HR ونجمة الجمعية الأولى لشهر مايو 👑",
+    badgeAr: "نجمة الشهر الذهبية الأولى على مستوى الجمعية",
+    color: "from-amber-400 via-yellow-500 to-orange-500",
+    shadow: "shadow-amber-500/10",
+    border: "border-amber-500/30",
+    initials: "JM",
+    category: "overall"
+  },
+  {
+    name: "Omar Sayed",
+    committee: "Public Relations",
+    committeeAr: "العلاقات العامة",
+    roleAr: "بيست العلاقات العامة والاتصال الاستراتيجي ⭐️",
+    badgeAr: "سفير التأثير والاتصال المؤسسي للجمعية",
+    color: "from-purple-500 via-pink-500 to-purple-600",
+    shadow: "shadow-purple-500/10",
+    border: "border-purple-500/25",
+    initials: "OS",
+    category: "pr"
+  },
+  {
+    name: "야나 🦋 (Yana)",
+    committee: "Media Production",
+    committeeAr: "ميديا والإنتاج الإعلامي",
+    roleAr: "بيست ميديا — الإبداع الرقمي وصناعة الصورة 📸",
+    badgeAr: "مستشارة الإعلام المرئي وتغطية الفعاليات",
+    color: "from-blue-500 via-indigo-500 to-blue-600",
+    shadow: "shadow-blue-500/10",
+    border: "border-blue-500/20",
+    initials: "야나",
+    category: "media"
+  },
+  {
+    name: "Rahma",
+    committee: "Video Editing",
+    committeeAr: "المونتاج وصناعة الفيديو",
+    roleAr: "بيست لجنة المونتاج والتحرير السينمائي 🎬",
+    badgeAr: "صانعة المحتوى المرئي السينمائي الملهم",
+    color: "from-emerald-400 to-teal-600",
+    shadow: "shadow-emerald-500/10",
+    border: "border-emerald-500/20",
+    initials: "R",
+    category: "ve"
+  },
+  {
+    name: "Omar",
+    committee: "Graphic Design",
+    committeeAr: "تصميم الجرافيك والهوية البصرية",
+    roleAr: "بيست الجرافيك وفارس الابتكار البصري 🎨",
+    badgeAr: "صاحب أجمل لمسات البصمة والهوية الفنية",
+    color: "from-cyan-400 to-blue-600",
+    shadow: "shadow-cyan-500/10",
+    border: "border-cyan-500/20",
+    initials: "O",
+    category: "graphic"
+  },
+  {
+    name: "Reem Jamal",
+    committee: "Sales & Sponsorship",
+    committeeAr: "لجنة المبيعات والتمويل",
+    roleAr: "بيست ميمبر مبيعات وقناصة الرعاية والاتفاقيات 💼",
+    badgeAr: "قائدة النمو وجذب الرعاية والشراكات الذهبية",
+    color: "from-rose-400 to-pink-600",
+    shadow: "shadow-rose-500/10",
+    border: "border-rose-500/20",
+    initials: "RJ",
+    category: "sales"
+  },
+  {
+    name: "Yassin Otaka",
+    committee: "Marketing & Sales",
+    committeeAr: "التسويق والمبيعات",
+    roleAr: "بيست الماركتينج وتاني بيست سيلز المشترك 📈",
+    badgeAr: "بطل النمو الرقمي والتواصل التسويقي الذكي",
+    color: "from-fuchsia-500 to-purple-600",
+    shadow: "shadow-fuchsia-500/10",
+    border: "border-fuchsia-500/20",
+    initials: "YO",
+    category: "marketing"
+  }
+];
+
+const PROMOTED_LEADER = {
+  name: "Rodina Mohammed",
+  titleAr: "بشرى ترقية استثنائية مستحقة ومباركة 🎉",
+  badgeAr: "من نائب رئيس العلاقات العامة ➔ رئيس العلاقات العامة والاتصال المؤسسي (Head of PR)",
+  achievement: "تقديراً واعترافاً بمسيرتها الذهبية، وجهودها الاستثنائية وتفانيها غير المحدود كأحد أهم الركائز والقادة في دعم فريق العلاقات العامة والاتصال.",
+  color: "from-teal-400 via-emerald-500 to-cyan-400",
+  shadow: "shadow-emerald-500/20",
+  border: "border-emerald-500/40",
+  initials: "RM"
+};
 
 export default function Home() {
   // حساب المتبقي التنازلي لحدث "مسار القاهرة 2026"
@@ -53,7 +155,89 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-white overflow-hidden">
+    <div className="bg-white overflow-hidden pt-36 md:pt-[140px]">
+      {/* Best Members Holographic Auto-Scrolling Marquee Ticker */}
+      <div id="best-members-marquee" className="bg-slate-950 border-y border-purple-900/35 py-5 relative overflow-hidden z-20 flex items-center shadow-[0_4px_30px_rgba(0,0,0,0.75)]" dir="ltr">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.18),transparent_70%)] pointer-events-none" />
+        
+        {/* Fixed Title Label (Glow Badge) */}
+        <div className="px-2.5 md:px-4 shrink-0 bg-slate-950 border-r border-slate-900 flex items-center gap-1.5 md:gap-2 relative z-10 font-[900] text-[10px] md:text-xs select-none text-white tracking-widest">
+          <Trophy size={14} className="text-amber-400 animate-bounce shrink-0" />
+          <span className="text-amber-400 font-sans uppercase font-[900] tracking-widest leading-none">HALL OF FAME 👑</span>
+        </div>
+
+        {/* Marquee Loop scrolling horizontally */}
+        <div className="flex-1 overflow-hidden relative flex items-center" dir="ltr">
+          <div
+            className="animate-marquee flex whitespace-nowrap gap-16 text-xs font-bold text-slate-300 md:text-sm pl-8 w-max shrink-0"
+          >
+            {/* Duplicated arrays to ensure flawless seamless loop repetition */}
+            {[...Array(2)].map((_, loopIdx) => (
+              <div key={loopIdx} className="flex items-center gap-16 select-none shrink-0 w-max" dir="ltr">
+                {/* 1. Rodina Promo */}
+                <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-900/80 border border-emerald-500/30 rounded-xl">
+                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-ping shrink-0" />
+                  <span className="px-1.5 py-0.5 bg-emerald-500/15 text-emerald-300 rounded-md text-[9.5px] font-black tracking-wider uppercase">SPECIAL PROMOTION 🎉</span>
+                  <span className="text-white font-[900] text-sm tracking-wide">{PROMOTED_LEADER.name}</span>
+                  <span className="text-emerald-400 font-bold text-sm">➔ Head of PR</span>
+                </div>
+
+                {/* 2. Jana Mustafa */}
+                <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-900/80 border border-amber-500/30 rounded-xl">
+                  <span className="text-amber-400 text-sm shrink-0">👑</span>
+                  <span className="px-1.5 py-0.5 bg-amber-500/15 text-amber-300 rounded-md text-[9.5px] font-black tracking-wider uppercase">OVERALL BEST MEMBER</span>
+                  <span className="text-white font-[900] text-sm tracking-wide">Jana Mustafa</span>
+                  <span className="text-slate-300 font-medium">/ HR</span>
+                </div>
+
+                {/* 3. Omar Sayed */}
+                <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-900/80 border border-purple-500/30 rounded-xl">
+                  <span className="text-purple-400 text-sm shrink-0">⭐️</span>
+                  <span className="px-1.5 py-0.5 bg-purple-500/15 text-purple-300 rounded-md text-[9.5px] font-black tracking-wider uppercase">BEST MEMBER PR</span>
+                  <span className="text-white font-[900] text-sm tracking-wide">Omar Sayed</span>
+                  <span className="text-slate-300 font-medium">/ Public Relations</span>
+                </div>
+
+                {/* 4. Yana */}
+                <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-900/80 border border-blue-500/30 rounded-xl">
+                  <span className="text-blue-400 text-sm shrink-0">📸</span>
+                  <span className="px-1.5 py-0.5 bg-blue-500/15 text-blue-300 rounded-md text-[9.5px] font-black tracking-wider uppercase">BEST MEMBER PR Media</span>
+                  <span className="text-white font-[900] text-sm tracking-wide">야نا (Yana) 🦋</span>
+                </div>
+
+                {/* 5. Rahma */}
+                <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-900/80 border border-emerald-500/30 rounded-xl">
+                  <span className="text-emerald-400 text-sm shrink-0">🎬</span>
+                  <span className="px-1.5 py-0.5 bg-emerald-500/15 text-emerald-300 rounded-md text-[9.5px] font-black tracking-wider uppercase">BEST VIDEO EDITING</span>
+                  <span className="text-white font-[900] text-sm tracking-wide">Rahma</span>
+                </div>
+
+                {/* 6. Omar */}
+                <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-900/80 border border-cyan-500/30 rounded-xl">
+                  <span className="text-cyan-400 text-sm shrink-0">🎨</span>
+                  <span className="px-1.5 py-0.5 bg-cyan-500/15 text-cyan-300 rounded-md text-[9.5px] font-black tracking-wider uppercase">BEST GRAPHIC DESIGN</span>
+                  <span className="text-white font-[900] text-sm tracking-wide">Omar</span>
+                </div>
+
+                {/* 7. Reem Jamal */}
+                <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-900/80 border border-rose-500/30 rounded-xl">
+                  <span className="text-rose-400 text-sm shrink-0">💼</span>
+                  <span className="px-1.5 py-0.5 bg-rose-500/15 text-rose-300 rounded-md text-[9.5px] font-black tracking-wider uppercase">BEST SALES & CORPs</span>
+                  <span className="text-white font-[900] text-sm tracking-wide">Reem Jamal</span>
+                </div>
+
+                {/* 8. Yassin Otaka */}
+                <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-900/80 border border-fuchsia-400/30 rounded-xl">
+                  <span className="text-fuchsia-400 text-sm shrink-0">📈</span>
+                  <span className="px-1.5 py-0.5 bg-fuchsia-500/15 text-fuchsia-300 rounded-md text-[9.5px] font-black tracking-wider uppercase">BEST MARKETING</span>
+                  <span className="text-white font-[900] text-sm tracking-wide">Yassin Otaka</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-slate-50">
         <TechGrid />
@@ -380,4 +564,4 @@ export default function Home() {
       </section>
     </div>
   );
-            }
+        }
