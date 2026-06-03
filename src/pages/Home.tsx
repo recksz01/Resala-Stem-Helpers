@@ -7,21 +7,15 @@ import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { 
   ArrowRight, 
-  Sparkles, 
   BookOpen, 
   Users, 
   BrainCircuit, 
   Cpu, 
   Calendar, 
-  Compass, 
-  Mic, 
   Award, 
   MapPin, 
   Globe, 
-  Clock,
-  Trophy,
-  Crown,
-  Medal
+  Trophy
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import TechGrid from "../components/TechGrid";
@@ -65,7 +59,7 @@ const MAY_BEST_MEMBERS = [
     color: "from-blue-500 via-indigo-500 to-blue-600",
     shadow: "shadow-blue-500/10",
     border: "border-blue-500/20",
-    initials: "야나",
+    initials: "야نا",
     category: "media"
   },
   {
@@ -130,7 +124,6 @@ const PROMOTED_LEADER = {
 };
 
 export default function Home() {
-  // حساب المتبقي التنازلي لحدث "مسار القاهرة 2026"
   const [timeLeft, setTimeLeft] = useState({ days: 22, hours: 3, minutes: 48, seconds: 34 });
 
   useEffect(() => {
@@ -168,10 +161,7 @@ export default function Home() {
 
         {/* Marquee Loop scrolling horizontally */}
         <div className="flex-1 overflow-hidden relative flex items-center" dir="ltr">
-          <div
-            className="animate-marquee flex whitespace-nowrap gap-16 text-xs font-bold text-slate-300 md:text-sm pl-8 w-max shrink-0"
-          >
-            {/* Duplicated arrays to ensure flawless seamless loop repetition */}
+          <div className="animate-marquee flex whitespace-nowrap gap-16 text-xs font-bold text-slate-300 md:text-sm pl-8 w-max shrink-0">
             {[...Array(2)].map((_, loopIdx) => (
               <div key={loopIdx} className="flex items-center gap-16 select-none shrink-0 w-max" dir="ltr">
                 {/* 1. Rodina Promo */}
@@ -360,14 +350,12 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 text-white rounded-[3rem] p-8 md:p-14 shadow-2xl relative overflow-hidden group"
           >
-            {/* Ambient High-tech border lights */}
             <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500/40 to-transparent" />
             <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
             
             <div className="relative z-10 flex flex-col lg:flex-row items-center gap-12 md:gap-16">
               <div className="flex-1 text-center lg:text-right" dir="rtl">
                 
-                {/* Visual Glow Status Indicator */}
                 <div className="inline-flex items-center gap-2.5 px-4.5 py-2 bg-purple-500/10 border border-purple-500/35 rounded-full text-xs font-black text-purple-300 mb-6 uppercase tracking-wider shadow-lg shadow-purple-950/45">
                   <span className="w-2 h-2 bg-emerald-400 rounded-full animate-ping" />
                   <span>الحدث السنوي الأكبر — مسار القاهرة 2026 (النسخة السابعة)</span>
@@ -564,4 +552,4 @@ export default function Home() {
       </section>
     </div>
   );
-        }
+    }
