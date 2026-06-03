@@ -136,7 +136,6 @@ export default function STEMCompanion() {
     // Track mouse coordinates dynamically & detect hovered interactive buttons with throttling
     let lastCheckTime = 0;
     const handleMouseMove = (e: MouseEvent) => {
-      // Don't track mouse while sleeping
       if (currentMode.current === "sleeping") return;
       spiderTarget.current = { x: e.clientX, y: e.clientY };
 
@@ -191,21 +190,20 @@ export default function STEMCompanion() {
     };
 
     const triggerPocketPoke = (clickX: number, clickY: number) => {
-      // صمام الأمان: منع التخريب والاهتزازات والتعبيرات إن لم يكن العنكبوت داخل الجيب
       const isSpiderInPocket = currentMode.current === "sleeping" || currentMode.current === "sleeping_entry";
       if (!isSpiderInPocket) return;
 
       const now = Date.now();
-      if (now - pokeCooldown.current < 220) return; // منع السبام السريع للنقرات
+      if (now - pokeCooldown.current < 220) return; // Prevent heavy click spam
       pokeCooldown.current = now;
 
-      // زيادة جرد ومستشعر الغضب
+      // Increase poke metrics
       pokeCount.current += 1;
 
-      // تفعيل اهتزاز الحظيرة البنائية للجيب
+      // Trigger structural pocket vibration shake
       pocketShake.current.time = 18;
 
-      // توليد شرارات تحذيرية حمراء أو صفراء
+      // Warning sparks
       const isExtremelyAngry = pokeCount.current >= 5;
       for (let s = 0; s < 12; s++) {
         dustRef.current.push({
@@ -217,7 +215,7 @@ export default function STEMCompanion() {
         });
       }
 
-      // موجة طاقة دائرية
+      // Ripple around the pocket
       rippleRef.current = {
         x: 65,
         y: 105,
@@ -227,8 +225,8 @@ export default function STEMCompanion() {
         color: isExtremelyAngry ? "#ef4444" : "#f59e0b"
       };
 
-      // نصوص الهولوجرام الطريفة متصاعدة الحدة
-      irritatedTimer.current = 145; // ~2.4 ثانية
+      // Playful hologram text progression
+      irritatedTimer.current = 145; // ~2.4 seconds
       const count = pokeCount.current;
       if (count === 1) {
         hologramText.current = "أوي! دعني أنم بسلام... 💤";
@@ -261,7 +259,6 @@ export default function STEMCompanion() {
       isWebShooting.current = true;
       webProgress.current = 1.0;
  
-      // Cosmic ripple
       rippleRef.current = {
         x: e.clientX,
         y: e.clientY,
@@ -312,7 +309,7 @@ export default function STEMCompanion() {
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
 
     // Initialize 8 legs (4 left, 4 right)
-    const legAnglesLeft = [-130, -80, -30, 20];   // angle offsets in deg
+    const legAnglesLeft = [-130, -80, -30, 20];   
     const legAnglesRight = [130, 80, 30, -20];
     const newLegs: Leg[] = [];
 
@@ -356,7 +353,7 @@ export default function STEMCompanion() {
       const tg = spiderTarget.current;
       const vl = spiderVel.current;
 
-      const sleepX = 65; // Coordinates for pocket spot
+      const sleepX = 65; 
       const sleepY = 105;
 
       // 1. DYNAMIC SCALE CALCULATIONS
@@ -1001,7 +998,7 @@ export default function STEMCompanion() {
         ctx.shadowBlur = 0;
       });
 
-      // 10. DRAW CENTRAL ROBOTIC GLOWING BODY
+      // 10. DRAW CENTRAL ROBOTIC BODY
       ctx.save();
       ctx.translate(sp.x, sp.y);
       ctx.rotate(bodyAngle);
@@ -1161,7 +1158,7 @@ export default function STEMCompanion() {
       }
       ctx.restore();
 
-      // 12. DRAW VIBRANT HOLOGRAPHIC CHAT SPEECH POPUP BUBBLE
+      // 12. DRAW SPEAK POPUP BUBBLE
       if (irritatedTimer.current > 0) {
         irritatedTimer.current--;
 
@@ -1272,4 +1269,4 @@ export default function STEMCompanion() {
       </div>
     </>
   );
-                           }
+    }
