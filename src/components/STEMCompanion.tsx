@@ -97,20 +97,22 @@ export default function STEMCompanion() {
     if (isDone) {
       setIsPreloaderFinished(true);
       if (currentMode.current === "hidden") {
-        currentMode.current = "normal"; // No drop repetition on route changes & transitions!
+        currentMode.current = "dropping";
+        spawnTimer.current = 50;
+        spiderPos.current = { x: window.innerWidth / 2, y: -120 };
       }
     }
 
     const handlePreloaderFinished = () => {
-      // Delay slightly by 900ms to allow the preloader transition blur/fadeout to completely clear!
+      // Delay slightly by 700ms to allow the preloader transition blur/fadeout to completely clear!
       setTimeout(() => {
         setIsPreloaderFinished(true);
         if (currentMode.current === "hidden") {
           currentMode.current = "dropping";
           spawnTimer.current = 50; // loftier and clearer drop!
         }
-        spiderPos.current = { x: spiderTarget.current.x || window.innerWidth / 2, y: -120 };
-      }, 900);
+        spiderPos.current = { x: window.innerWidth / 2, y: -120 };
+      }, 700);
     };
 
     window.addEventListener("preloaderFinished", handlePreloaderFinished);
@@ -121,12 +123,12 @@ export default function STEMCompanion() {
         clearInterval(pollInterval);
         setIsPreloaderFinished(true);
         if (currentMode.current === "hidden") {
-          // Delay by 900ms for fallback as well to sync beautifully
+          // Delay briefly for fallback as well to sync beautifully
           setTimeout(() => {
             currentMode.current = "dropping";
             spawnTimer.current = 50;
-            spiderPos.current = { x: spiderTarget.current.x || window.innerWidth / 2, y: -120 };
-          }, 900);
+            spiderPos.current = { x: window.innerWidth / 2, y: -120 };
+          }, 700);
         }
       }
     }, 300);
@@ -301,7 +303,7 @@ export default function STEMCompanion() {
         x: e.clientX,
         y: e.clientY,
         radius: 2,
-        maxRadius: 50,
+        maxRadius: 45,
         alpha: 0.8,
         color: "#a855f7" // Purple neon
       };
@@ -412,7 +414,7 @@ export default function STEMCompanion() {
         targetScale = 0.82 + climbProgress * 0.18;
       } else if (currentMode.current === "dropping") {
         // Slow emergence growth from center of digital portal
-        const spawnProgress = Math.min(1.0, (40 - spawnTimer.current) / 40);
+        const spawnProgress = Math.min(1.0, (50 - spawnTimer.current) / 50);
         targetScale = 0.4 + spawnProgress * 0.6;
       }
       spiderScale.current += (targetScale - spiderScale.current) * 0.12;
@@ -457,11 +459,11 @@ export default function STEMCompanion() {
         spawnTimer.current--;
         hoveredInteractivityRef.current = null;
 
-        const idealTargetX = tg.x || window.innerWidth / 2;
-        const idealTargetY = tg.y || window.innerHeight * 0.45;
+        const idealTargetX = window.innerWidth / 2;
+        const idealTargetY = window.innerHeight * 0.35;
 
-        // Elegant physical elastic bounce
-        const progress = Math.min(1.0, (40 - spawnTimer.current) / 40);
+        // Elegant physical elastic bounce with 50 frames
+        const progress = Math.min(1.0, (50 - spawnTimer.current) / 50);
         const elastic = 1.0 - Math.cos(progress * Math.PI * 1.5) * Math.exp(-progress * 3.5);
         
         sp.x = idealTargetX;
@@ -769,10 +771,7 @@ export default function STEMCompanion() {
         // Luminous neon emerald frame outline to guarantee high contrast pop in light themes!
         ctx.lineWidth = 1.5;
         ctx.strokeStyle = "rgba(16, 185, 129, 0.85)";
-        ctx.shadowColor = "#10b981";
-        ctx.shadowBlur = 6;
         ctx.stroke();
-        ctx.shadowBlur = 0; // reset
       }
       ctx.restore();
 
@@ -838,8 +837,6 @@ export default function STEMCompanion() {
           ctx.arc(rp.x, rp.y, rp.radius, 0, Math.PI * 2);
           ctx.strokeStyle = rp.color;
           ctx.lineWidth = 1.2;
-          ctx.shadowColor = rp.color;
-          ctx.shadowBlur = 10;
           ctx.stroke();
 
           // Under-glow ring fill (low opacity)
@@ -882,10 +879,7 @@ export default function STEMCompanion() {
 
         ctx.strokeStyle = "rgba(16, 185, 129, 0.55)"; // Clean Neon Green
         ctx.lineWidth = 1.5;
-        ctx.shadowColor = "#10b981";
-        ctx.shadowBlur = 8;
         ctx.stroke();
-        ctx.shadowBlur = 0;
 
         // Glowing connection ring anchor on the button itself
         ctx.beginPath();
@@ -902,10 +896,7 @@ export default function STEMCompanion() {
         ctx.lineTo(webTarget.current.x, webTarget.current.y);
         ctx.strokeStyle = `rgba(168, 85, 247, ${webProgress.current})`;
         ctx.lineWidth = 2 * webProgress.current;
-        ctx.shadowColor = "#a855f7";
-        ctx.shadowBlur = 10;
         ctx.stroke();
-        ctx.shadowBlur = 0; // reset
       }
 
       // 8. UPDATE PROCEDURALLY ANIMATED LEGS (with dynamic width scaling)
@@ -1065,10 +1056,7 @@ export default function STEMCompanion() {
         ctx.beginPath();
         ctx.arc(leg.footX, leg.footY, (isTucked ? 1.6 : 3) * spiderScale.current, 0, Math.PI * 2);
         ctx.fillStyle = "#ef4444";
-        ctx.shadowColor = "#ef4444";
-        ctx.shadowBlur = isTucked ? 3 * spiderScale.current : 8 * spiderScale.current;
         ctx.fill();
-        ctx.shadowBlur = 0; // reset
       });
 
       // 9. DRAW CENTRAL ROBOTIC GLOWING BODY
@@ -1101,24 +1089,18 @@ export default function STEMCompanion() {
       
       const isInterfacing = !!currentInteractivity;
       let reactorGlow = isInterfacing ? "#10b981" : "#a855f7"; // Glowing green when hacking, purple normally
-      let glowIntensity = isInterfacing ? 16 : 12;
 
       if (currentMode.current === "sleeping" || currentMode.current === "sleeping_entry") {
         const breath = Math.sin(Date.now() * 0.002) * 0.4 + 0.6; // Soft pulsing breath
         reactorGlow = `rgba(147, 51, 234, ${0.2 + breath * 0.5})`; // Faint cozy purple
-        glowIntensity = 5 + breath * 4;
       } else if (currentMode.current === "wakeup") {
         // High frequency flashing
         const pulse = Math.floor(Date.now() / 50) % 2 === 0;
         reactorGlow = pulse ? "#10b981" : "#06b6d4"; // flash emerald / cyan
-        glowIntensity = 22;
       }
 
       ctx.fillStyle = reactorGlow;
-      ctx.shadowColor = reactorGlow === "rgba(147, 51, 234, 0.4)" ? "#9333ea" : reactorGlow;
-      ctx.shadowBlur = glowIntensity;
       ctx.fill();
-      ctx.shadowBlur = 0; // reset
 
       // Front visor plate
       ctx.beginPath();
@@ -1149,7 +1131,7 @@ export default function STEMCompanion() {
           ctx.lineTo(10, 0.5);
           ctx.stroke();
 
-          // Draw custom glitch code or rude gesture directly on visor faceplate on pokes
+          // Draw custom glitch code directly on visor faceplate on pokes
           ctx.fillStyle = "#ef4444";
           ctx.font = "bold 6px sans-serif";
           ctx.fillText("🖕", 1, 1);
@@ -1185,14 +1167,11 @@ export default function STEMCompanion() {
         ctx.beginPath();
         ctx.arc(9, -3, 2, 0, Math.PI * 2);
         ctx.fillStyle = eyeColor;
-        ctx.shadowColor = eyeColor;
-        ctx.shadowBlur = 6;
         ctx.fill();
         
         ctx.beginPath();
         ctx.arc(9, 3, 2, 0, Math.PI * 2);
         ctx.fill();
-        ctx.shadowBlur = 0; // reset
       }
 
       ctx.restore();
@@ -1210,9 +1189,6 @@ export default function STEMCompanion() {
 
         const pX = 65 + shakeX;
         const pY = 105 + shakeY;
-        
-        ctx.shadowColor = "rgba(168, 85, 247, 0.35)";
-        ctx.shadowBlur = 6;
 
         // Draw elegant organic U-shaped pouch front cover (matching the back layer with mouth dip)
         ctx.beginPath();
@@ -1290,11 +1266,8 @@ export default function STEMCompanion() {
         ctx.fillStyle = hologramFill;
         ctx.strokeStyle = hologramColor;
         ctx.lineWidth = 1.35;
-        ctx.shadowColor = hologramColor;
-        ctx.shadowBlur = 8;
         ctx.fill();
         ctx.stroke();
-        ctx.shadowBlur = 0;
         
         // Little arrow pointing back towards the center of the pocket
         ctx.beginPath();
@@ -1367,4 +1340,4 @@ export default function STEMCompanion() {
       </div>
     </>
   );
-    }
+      }
