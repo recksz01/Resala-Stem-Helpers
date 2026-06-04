@@ -10,7 +10,6 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollProgress from "./components/ScrollProgress";
 import LoadingScreen from "./components/LoadingScreen";
-import STEMCompanion from "./components/STEMCompanion"; // 👈 استيراد العنكبوت الجديد هنا
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Programs from "./pages/Programs";
@@ -31,7 +30,6 @@ export default function App() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
-        <STEMCompanion /> {/* 👈 إضافة المكون في جذع الشجرة ليعمل في كافة الصفحات */}
         <LoadingScreen />
         <ScrollToTop />
         <ScrollProgress />
