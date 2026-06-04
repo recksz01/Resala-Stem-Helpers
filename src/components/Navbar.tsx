@@ -56,18 +56,14 @@ export default function Navbar() {
           <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center p-1 group-hover:rotate-6 transition-transform shadow-lg overflow-hidden relative">
             <div className="w-full h-full bg-brand-purple rounded-xl flex items-center justify-center relative overflow-hidden">
               <img 
-                src="/logo.png" 
+                src="/logo-internal.png" 
                 alt="Resala STEM helpers logo" 
                 referrerPolicy="no-referrer"
                 onError={(e) => {
                   const img = e.currentTarget;
-                  if (img.src.endsWith('/logo.png')) {
-                    img.src = '/logooo.png';
-                  } else {
-                    img.style.display = 'none';
-                    const fb = img.parentElement?.querySelector('.logo-fallback');
-                    if (fb) (fb as HTMLElement).style.display = 'flex';
-                  }
+                  img.style.display = 'none';
+                  const fb = img.parentElement?.querySelector('.logo-fallback');
+                  if (fb) (fb as HTMLElement).style.display = 'flex';
                 }}
                 className="w-full h-full object-cover rounded-xl"
               />
@@ -186,4 +182,4 @@ export default function Navbar() {
       </motion.div>
     </motion.nav>
   );
-              }
+}
