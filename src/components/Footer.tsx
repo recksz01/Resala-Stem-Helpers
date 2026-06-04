@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Heart, Facebook, Youtube } from "lucide-react";
+import { Rocket, Heart, Facebook, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
@@ -25,9 +25,14 @@ export default function Footer() {
                     alt="Resala STEM helpers logo" 
                     referrerPolicy="no-referrer"
                     onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                      const fb = e.currentTarget.parentElement?.querySelector('.logo-fallback');
-                      if (fb) (fb as HTMLElement).style.display = 'flex';
+                      const img = e.currentTarget;
+                      if (img.src.endsWith('/logo.png')) {
+                        img.src = '/logooo.png';
+                      } else {
+                        img.style.display = 'none';
+                        const fb = img.parentElement?.querySelector('.logo-fallback');
+                        if (fb) (fb as HTMLElement).style.display = 'flex';
+                      }
                     }}
                     className="w-full h-full object-cover rounded-xl"
                   />
@@ -101,4 +106,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-                }
+                   }
