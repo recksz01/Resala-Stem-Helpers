@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Rocket, Heart, Facebook, Youtube } from "lucide-react";
+import { Heart, Facebook, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
@@ -101,4 +101,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-                 }
+                }
