@@ -53,7 +53,7 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 group relative">
-          <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center p-1 group-hover:rotate-6 transition-transform shadow-lg overflow-hidden relative">
+          <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center p-0.5 group-hover:rotate-6 transition-transform shadow-lg overflow-hidden relative">
             <div className="w-full h-full bg-brand-purple rounded-xl flex items-center justify-center relative overflow-hidden">
               <img 
                 src="/logo-internal.png" 
