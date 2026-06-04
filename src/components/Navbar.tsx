@@ -4,7 +4,7 @@
  */
 
 import { motion, useScroll, useTransform } from "motion/react";
-import { Menu, X, Facebook, Youtube } from "lucide-react";
+import { Menu, X, Rocket, Facebook, Youtube } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -60,9 +60,14 @@ export default function Navbar() {
                 alt="Resala STEM helpers logo" 
                 referrerPolicy="no-referrer"
                 onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                  const fb = e.currentTarget.parentElement?.querySelector('.logo-fallback');
-                  if (fb) (fb as HTMLElement).style.display = 'flex';
+                  const img = e.currentTarget;
+                  if (img.src.endsWith('/logo.png')) {
+                    img.src = '/logooo.png';
+                  } else {
+                    img.style.display = 'none';
+                    const fb = img.parentElement?.querySelector('.logo-fallback');
+                    if (fb) (fb as HTMLElement).style.display = 'flex';
+                  }
                 }}
                 className="w-full h-full object-cover rounded-xl"
               />
@@ -181,4 +186,4 @@ export default function Navbar() {
       </motion.div>
     </motion.nav>
   );
-                }
+              }
