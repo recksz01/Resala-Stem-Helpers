@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 export default function LoadingScreen() {
   const [loading, setLoading] = useState(true);
   const [percent, setPercent] = useState(0);
-  const [isCinematic, setIsCinematic] = useState(false);
+  const [isCinematic, setIsCinematic] = useState(true);
 
   useEffect(() => {
     const now = Date.now();
@@ -228,7 +228,7 @@ export default function LoadingScreen() {
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.8 }}
-                  className="w-24 h-24 bg-white rounded-3xl flex items-center justify-center p-1.5 shadow-2xl relative mb-4"
+                  className="w-24 h-24 bg-white rounded-3xl flex items-center justify-center p-0.5 shadow-2xl relative mb-4"
                 >
                   <div className="w-full h-full bg-brand-purple rounded-2xl flex items-center justify-center relative overflow-hidden">
                     <img 
