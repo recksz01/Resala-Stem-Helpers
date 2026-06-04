@@ -18,9 +18,25 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-3 mb-8 group">
-              <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center p-1 group-hover:rotate-6 transition-transform shadow-lg overflow-hidden">
-                <div className="w-full h-full bg-brand-purple rounded-xl flex items-center justify-center">
-                  <span className="text-white text-xs font-black italic tracking-tighter">S<span className="text-red-500">T</span>EM</span>
+              <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center p-1 group-hover:rotate-6 transition-transform shadow-lg overflow-hidden relative">
+                <div className="w-full h-full bg-brand-purple rounded-xl flex items-center justify-center relative overflow-hidden">
+                  <img 
+                    src="/logo.png" 
+                    alt="Resala STEM helpers logo" 
+                    referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                      const fb = e.currentTarget.parentElement?.querySelector('.logo-fallback');
+                      if (fb) (fb as HTMLElement).style.display = 'flex';
+                    }}
+                    className="w-full h-full object-cover rounded-xl"
+                  />
+                  {/* Fallback to stylized elegant text if the image file isn't uploaded/found yet */}
+                  <div className="logo-fallback hidden absolute inset-0 bg-brand-purple rounded-xl flex items-center justify-center">
+                    <span className="text-white text-xs font-black italic tracking-tighter relative z-10">S<span className="text-red-500">T</span>EM</span>
+                  </div>
+                  {/* Internal Glow Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                 </div>
               </div>
               <div className="flex flex-col">
@@ -37,7 +53,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-4">
                {[
-                 { icon: Facebook, href: "https://www.facebook.com/share/1DyskoD64R/" },
+                 { icon: Facebook, href: "https://facebook.com/ResalaSTEM" },
                  { icon: Youtube, href: "https://youtube.com/@resalastem-et5vd?si=c-HF-NEhKF4cmB8E" }
                ].map((social, i) => (
                  <a 
@@ -66,7 +82,7 @@ export default function Footer() {
             <h4 className="font-black mb-8 uppercase tracking-[0.2em] text-sm text-red-500">Connect</h4>
             <ul className="space-y-4 font-bold">
               <li><a href="mailto:fly2877@gmail.com" className="text-white/60 hover:text-white transition-colors">fly2877@gmail.com</a></li>
-              <li><a href="https://www.facebook.com/share/1DyskoD64R/" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">Facebook</a></li>
+              <li><a href="https://facebook.com/ResalaSTEM" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">Facebook</a></li>
               <li><a href="https://youtube.com/@resalastem-et5vd?si=c-HF-NEhKF4cmB8E" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">YouTube Channel</a></li>
               <li><span className="text-white/30 text-xs">Cairo, Egypt</span></li>
             </ul>
@@ -78,11 +94,6 @@ export default function Footer() {
           <div className="flex items-center gap-2">
             Developed with Integrity by <span className="text-white/60">Omar Sayed Haggag</span>
           </div>
-          
-          <div className="flex items-center gap-2">
-            Deployment Assistance by <span className="text-white/60">Omar Afify</span>
-          </div>
-          
           <div className="flex items-center gap-1 group">
              Made with <Heart size={14} className="text-red-500 fill-red-500 group-hover:scale-125 transition-transform" /> in Egypt
           </div>
@@ -90,4 +101,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+                 }
