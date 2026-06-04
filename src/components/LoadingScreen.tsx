@@ -141,7 +141,7 @@ export default function LoadingScreen() {
                             visible: { y: 0, opacity: 1, filter: "blur(0px)", scale: 1, rotateY: 0 }
                           }}
                           transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
-                          className={`text-8xl md:text-[12rem] font-black italic tracking-tighter block leading-none select-none ${char === 'T' ? 'text-red-500 drop-shadow-[0_0_30px_rgba(239,68,68,0.3)]' : 'text-white drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]'}`}
+                          className={`text-8xl md:text-[12rem] font-black italic tracking-tighter block leading-none select-none ${char === 'T' ? 'text-red-500 drop-shadow-[0_0_30px_rgba(239,68,68,0.5)]' : 'text-white'}`}
                         >
                           {char}
                         </motion.span>
@@ -232,18 +232,14 @@ export default function LoadingScreen() {
                 >
                   <div className="w-full h-full bg-brand-purple rounded-2xl flex items-center justify-center relative overflow-hidden">
                     <img 
-                      src="/logo.png" 
+                      src="/logo-internal.png" 
                       alt="Resala STEM logo" 
                       referrerPolicy="no-referrer"
                       onError={(e) => {
                         const img = e.currentTarget;
-                        if (img.src.endsWith('/logo.png')) {
-                          img.src = '/logooo.png';
-                        } else {
-                          img.style.display = 'none';
-                          const fb = img.parentElement?.querySelector('.logo-fallback');
-                          if (fb) (fb as HTMLElement).style.display = 'flex';
-                        }
+                        img.style.display = 'none';
+                        const fb = img.parentElement?.querySelector('.logo-fallback');
+                        if (fb) (fb as HTMLElement).style.display = 'flex';
                       }}
                       className="w-full h-full object-cover rounded-2xl"
                     />
@@ -304,4 +300,4 @@ export default function LoadingScreen() {
       )}
     </AnimatePresence>
   );
-                    }
+}
