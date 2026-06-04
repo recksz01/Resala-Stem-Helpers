@@ -55,9 +55,23 @@ export default function Navbar() {
         <Link to="/" className="flex items-center gap-3 group relative">
           <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center p-1 group-hover:rotate-6 transition-transform shadow-lg overflow-hidden relative">
             <div className="w-full h-full bg-brand-purple rounded-xl flex items-center justify-center relative overflow-hidden">
-               {/* Internal Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <span className="text-white text-xs font-black italic tracking-tighter relative z-10">S<span className="text-red-500">T</span>EM</span>
+              <img 
+                src="/logo.png" 
+                alt="Resala STEM helpers logo" 
+                referrerPolicy="no-referrer"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  const fb = e.currentTarget.parentElement?.querySelector('.logo-fallback');
+                  if (fb) (fb as HTMLElement).style.display = 'flex';
+                }}
+                className="w-full h-full object-cover rounded-xl"
+              />
+              {/* Fallback to stylized elegant text if the image file isn't uploaded/found yet */}
+              <div className="logo-fallback hidden absolute inset-0 bg-brand-purple rounded-xl flex items-center justify-center">
+                <span className="text-white text-xs font-black italic tracking-tighter relative z-10">S<span className="text-red-500">T</span>EM</span>
+              </div>
+              {/* Internal Glow Effect */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
             </div>
           </div>
           <div className="flex flex-col">
@@ -167,4 +181,4 @@ export default function Navbar() {
       </motion.div>
     </motion.nav>
   );
-}
+                                                                                            }
