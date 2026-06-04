@@ -4,7 +4,7 @@
  */
 
 import { motion, useScroll, useTransform } from "motion/react";
-import { Menu, X, Rocket, Facebook, Youtube } from "lucide-react";
+import { Menu, X, Facebook, Youtube } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -181,4 +181,4 @@ export default function Navbar() {
       </motion.div>
     </motion.nav>
   );
-                                                                                            }
+                }
