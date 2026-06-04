@@ -44,8 +44,8 @@ export default function STEMCompanion() {
   const [isSleeping, setIsSleeping] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  // Modes: "hidden" | "digging" | "normal" | "sleeping" | "wakeup" | "sleeping_entry"
-  const currentMode = useRef<"hidden" | "digging" | "normal" | "sleeping" | "wakeup" | "sleeping_entry">("hidden");
+  // Modes: "hidden" | "dropping" | "normal" | "sleeping" | "wakeup" | "sleeping_entry"
+  const currentMode = useRef<"hidden" | "dropping" | "normal" | "sleeping" | "wakeup" | "sleeping_entry">("hidden");
 
   // Track the wakeup countdown/frame timer
   const wakeupTimer = useRef(0);
@@ -53,8 +53,8 @@ export default function STEMCompanion() {
   // Track the sleep entry countdown/frame timer
   const sleepEntryTimer = useRef(0);
 
-  // Track continuous frames inside the digging mode
-  const digFrame = useRef(0);
+  // Track continuous frames inside the dropping mode
+  const spawnTimer = useRef(0);
 
   // Custom arrays for crying/sad tear pixels
   const tearsRef = useRef<{ x: number; y: number; vy: number; alpha: number; speed: number }[]>([]);
@@ -97,18 +97,20 @@ export default function STEMCompanion() {
     if (isDone) {
       setIsPreloaderFinished(true);
       if (currentMode.current === "hidden") {
-        currentMode.current = "digging";
+        currentMode.current = "normal"; // No drop repetition on route changes & transitions!
       }
-      spiderPos.current = { x: window.innerWidth / 2, y: window.innerHeight * 0.45 };
     }
 
     const handlePreloaderFinished = () => {
-      setIsPreloaderFinished(true);
-      if (currentMode.current === "hidden") {
-        currentMode.current = "digging";
-      }
-      digFrame.current = 0;
-      spiderPos.current = { x: window.innerWidth / 2, y: window.innerHeight * 0.45 };
+      // Delay slightly by 900ms to allow the preloader transition blur/fadeout to completely clear!
+      setTimeout(() => {
+        setIsPreloaderFinished(true);
+        if (currentMode.current === "hidden") {
+          currentMode.current = "dropping";
+          spawnTimer.current = 50; // loftier and clearer drop!
+        }
+        spiderPos.current = { x: spiderTarget.current.x || window.innerWidth / 2, y: -120 };
+      }, 900);
     };
 
     window.addEventListener("preloaderFinished", handlePreloaderFinished);
@@ -116,21 +118,27 @@ export default function STEMCompanion() {
     // Fallback polling check every 300ms to verify preloader status
     const pollInterval = setInterval(() => {
       if (!!(window as any).__preloaderFinished) {
+        clearInterval(pollInterval);
         setIsPreloaderFinished(true);
         if (currentMode.current === "hidden") {
-          currentMode.current = "digging";
+          // Delay by 900ms for fallback as well to sync beautifully
+          setTimeout(() => {
+            currentMode.current = "dropping";
+            spawnTimer.current = 50;
+            spiderPos.current = { x: spiderTarget.current.x || window.innerWidth / 2, y: -120 };
+          }, 900);
         }
-        clearInterval(pollInterval);
       }
     }, 300);
 
-    // Unconditional safety timeout: force spawn after 4.5 seconds absolute max
+    // Unconditional safety timeout: force spawn after 10 seconds absolute max
     const safetyTimeout = setTimeout(() => {
       setIsPreloaderFinished(true);
       if (currentMode.current === "hidden") {
-        currentMode.current = "digging";
+        currentMode.current = "dropping";
+        spawnTimer.current = 50;
       }
-    }, 4500);
+    }, 10000);
 
     return () => {
       window.removeEventListener("preloaderFinished", handlePreloaderFinished);
@@ -345,32 +353,32 @@ export default function STEMCompanion() {
 
     // Left legs
     for (let i = 0; i < 4; i++) {
-       newLegs.push({
-         side: "left",
-         index: i,
-         footX: spiderPos.current.x - 50,
-         footY: spiderPos.current.y + (i - 1.5) * 20,
-         idealX: 0,
-         idealY: 0,
-         stepProgress: 1.0,
-         stepStartX: 0,
-         stepStartY: 0
-       });
+      newLegs.push({
+        side: "left",
+        index: i,
+        footX: spiderPos.current.x - 50,
+        footY: spiderPos.current.y + (i - 1.5) * 20,
+        idealX: 0,
+        idealY: 0,
+        stepProgress: 1.0,
+        stepStartX: 0,
+        stepStartY: 0
+      });
     }
 
     // Right legs
     for (let i = 0; i < 4; i++) {
-       newLegs.push({
-         side: "right",
-         index: i,
-         footX: spiderPos.current.x + 50,
-         footY: spiderPos.current.y + (i - 1.5) * 20,
-         idealX: 0,
-         idealY: 0,
-         stepProgress: 1.0,
-         stepStartX: 0,
-         stepStartY: 0
-       });
+      newLegs.push({
+        side: "right",
+        index: i,
+        footX: spiderPos.current.x + 50,
+        footY: spiderPos.current.y + (i - 1.5) * 20,
+        idealX: 0,
+        idealY: 0,
+        stepProgress: 1.0,
+        stepStartX: 0,
+        stepStartY: 0
+      });
     }
 
     legsRef.current = newLegs;
@@ -402,10 +410,10 @@ export default function STEMCompanion() {
         // Smoothly scale up from 0.82 back to 1.0 during active climber exit
         const climbProgress = (65 - wakeupTimer.current) / 35; // 0 to 1
         targetScale = 0.82 + climbProgress * 0.18;
-      } else if (currentMode.current === "digging") {
+      } else if (currentMode.current === "dropping") {
         // Slow emergence growth from center of digital portal
-        const spawnProgress = Math.max(0, (digFrame.current - 35) / 60);
-        targetScale = Math.min(1.0, spawnProgress);
+        const spawnProgress = Math.min(1.0, (40 - spawnTimer.current) / 40);
+        targetScale = 0.4 + spawnProgress * 0.6;
       }
       spiderScale.current += (targetScale - spiderScale.current) * 0.12;
 
@@ -445,65 +453,54 @@ export default function STEMCompanion() {
       }
 
       // Handle custom modes
-      if (currentMode.current === "digging") {
-        digFrame.current++;
+      if (currentMode.current === "dropping") {
+        spawnTimer.current--;
         hoveredInteractivityRef.current = null;
-        
-        // Locked position in the middle of screen for portal
-        sp.x = window.innerWidth / 2;
-        sp.y = window.innerHeight * 0.45;
-        
-        // Face downwards
-        spiderAngle.current = Math.sin(Date.now() * 0.015) * 0.15 + Math.PI / 2;
 
-        // Generate tiny cyber sparks floating into the digital vortex!
-        if (digFrame.current < 110 && Math.random() < 0.35) {
-          const angle = Math.random() * Math.PI * 2;
-          const dist = 10 + Math.random() * 45 * (digFrame.current / 110);
+        const idealTargetX = tg.x || window.innerWidth / 2;
+        const idealTargetY = tg.y || window.innerHeight * 0.45;
+
+        // Elegant physical elastic bounce
+        const progress = Math.min(1.0, (40 - spawnTimer.current) / 40);
+        const elastic = 1.0 - Math.cos(progress * Math.PI * 1.5) * Math.exp(-progress * 3.5);
+        
+        sp.x = idealTargetX;
+        sp.y = -120 + (idealTargetY - (-120)) * elastic;
+        spiderAngle.current = Math.PI / 2; // Face downwards while descending
+
+        // Generate tiny cyber sparks floating off legs as we plunge
+        if (Math.random() < 0.45) {
           dustRef.current.push({
-            x: sp.x + Math.cos(angle) * dist,
-            y: sp.y + Math.sin(angle) * dist,
-            alpha: 0.9,
-            color: Math.random() > 0.5 ? "#10b981" : "#a855f7", 
+            x: sp.x + (Math.random() * 12 - 6),
+            y: sp.y + 10,
+            alpha: 1.0,
+            color: Math.random() > 0.5 ? "#10b981" : "#a855f7",
             size: 1.0 + Math.random() * 1.5
           });
         }
 
-        // Animate legs tucking and gripping out of center as it spawns
-        legsRef.current.forEach((leg) => {
-          leg.stepProgress = 1.0;
-          const sMult = spiderScale.current;
-          leg.footX = sp.x + (leg.side === "left" ? -44 : 44) * sMult + Math.sin(Date.now() * 0.03 + leg.index) * 5 * sMult;
-          leg.footY = sp.y + (leg.index - 1.5) * 16 * sMult + Math.cos(Date.now() * 0.03) * 3 * sMult;
-        });
-
-        // Trigger complete portal spawn breakout at step 115
-        if (digFrame.current >= 115) {
-          currentMode.current = "wakeup";
-          wakeupTimer.current = 50;
-          vl.y = -14; // spring upward out of portal
-          vl.x = Math.random() * 4 - 2;
+        // Trigger complete land stabilization
+        if (spawnTimer.current <= 0) {
+          currentMode.current = "normal";
           
           // Explosion of colorful sparks!
-          for (let s = 0; s < 35; s++) {
-            const angle = Math.random() * Math.PI * 2;
-            const spd = 4 + Math.random() * 6;
+          for (let s = 0; s < 15; s++) {
             dustRef.current.push({
               x: sp.x,
               y: sp.y,
-              alpha: 1.0,
-              color: s % 3 === 0 ? "#06b6d4" : (s % 3 === 1 ? "#a855f7" : "#10b981"),
-              size: 2.0 + Math.random() * 2.0
+              alpha: 0.95,
+              color: s % 2 === 0 ? "#10b981" : "#a855f7",
+              size: 1.5 + Math.random() * 2.0
             });
           }
           
-          // Outer ripple
+          // Outer ripple on land!
           rippleRef.current = {
             x: sp.x,
             y: sp.y,
-            radius: 5,
-            maxRadius: 190,
-            alpha: 1.0,
+            radius: 3,
+            maxRadius: 75,
+            alpha: 0.9,
             color: "#10b981"
           };
         }
@@ -529,16 +526,40 @@ export default function STEMCompanion() {
         }
       } else if (currentMode.current === "sleeping_entry") {
         hoveredInteractivityRef.current = null;
-        sleepEntryTimer.current--;
 
         if (sleepEntryTimer.current > 35) {
           // Crawl up towards the pocket rim opening interface
           tg.x = sleepX + shakeX;
           tg.y = sleepY - 18 + shakeY;
           
-          spiderAngle.current += (-Math.PI / 2 - spiderAngle.current) * 0.15; // face upwards as we climb to entrance
+          const distanceToRim = Math.hypot(tg.x - sp.x, tg.y - sp.y);
+          if (distanceToRim > 100) {
+            // Scamper realistically in the real direction of travel!
+            const targetAngle = Math.atan2(tg.y - sp.y, tg.x - sp.x);
+            let diff = targetAngle - spiderAngle.current;
+            while (diff < -Math.PI) diff += Math.PI * 2;
+            while (diff > Math.PI) diff -= Math.PI * 2;
+            spiderAngle.current += diff * 0.15;
+          } else {
+            // Face upwards as we climb to entrance
+            let diff = -Math.PI / 2 - spiderAngle.current;
+            while (diff < -Math.PI) diff += Math.PI * 2;
+            while (diff > Math.PI) diff -= Math.PI * 2;
+            spiderAngle.current += diff * 0.15;
+          }
+          
           dynamicLegReach.current += (52 - dynamicLegReach.current) * 0.12;
+
+          // Only decrement below 36 when actually close to the target pocket rim!
+          if (distanceToRim < 30) {
+            sleepEntryTimer.current--;
+          } else {
+            if (sleepEntryTimer.current > 36) {
+              sleepEntryTimer.current--;
+            }
+          }
         } else {
+          sleepEntryTimer.current--;
           // Turn around and wiggle backwards down behind the pocket cover!
           tg.x = sleepX + shakeX;
           tg.y = sleepY + 4 + shakeY;
@@ -598,8 +619,8 @@ export default function STEMCompanion() {
 
       // Web tether pulls the spider extremely fast to the point or during wake jumps
       const isShooting = isWebShooting.current;
-      let attractionForce = isShooting ? 0.35 : (currentMode.current === "digging" ? 0.0 : 0.08);
-      let maxSpeed = isShooting ? 35 : (currentMode.current === "digging" ? 0 : 18);
+      let attractionForce = isShooting ? 0.35 : (currentMode.current === "dropping" ? 0.0 : 0.08);
+      let maxSpeed = isShooting ? 35 : (currentMode.current === "dropping" ? 0 : 18);
 
       if (currentMode.current === "wakeup") {
         if (wakeupTimer.current > 30) {
@@ -619,7 +640,7 @@ export default function STEMCompanion() {
           sp.x += vl.x;
           sp.y += vl.y;
         }
-      } else if (currentMode.current === "digging") {
+      } else if (currentMode.current === "dropping") {
         // Position handled in custom state logic
       } else if (distance > (currentMode.current === "sleeping" ? 2 : 15)) {
         // Accelerate towards cursor or corner target
@@ -642,7 +663,7 @@ export default function STEMCompanion() {
         sp.y += vl.y;
 
         // Rotational alignment
-        if (currentMode.current !== "digging" && currentMode.current !== "sleeping") {
+        if (currentMode.current !== "dropping" && currentMode.current !== "sleeping") {
           const targetAngle = Math.atan2(dy, dx);
           let diff = targetAngle - spiderAngle.current;
           while (diff < -Math.PI) diff += Math.PI * 2;
@@ -679,73 +700,19 @@ export default function STEMCompanion() {
       // Clear entire canvas on every frame (to prevent trails overlapping layout text)
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // 3. DRAW DIGITAL DIMENSIONAL BREACH NEON PORTAL (while spawning)
-      if (currentMode.current === "digging") {
+      // 3. DRAW GLOWING LASER DROP SILK WIRE (while spawning)
+      if (currentMode.current === "dropping") {
         ctx.save();
-        const px = window.innerWidth / 2;
-        const py = window.innerHeight * 0.45;
-        const maxPortalSize = 100;
-        
-        // Portal expands elegantly up to frame 80
-        const progress = Math.min(1.0, digFrame.current / 80);
-        const radius = maxPortalSize * Math.sin(progress * Math.PI / 2);
-        
-        // Outer glowing vector circle
         ctx.beginPath();
-        ctx.arc(px, py, radius, 0, Math.PI * 2);
-        ctx.strokeStyle = "rgba(16, 185, 129, 0.75)"; // neon matrix green
-        ctx.lineWidth = 2.5;
-        ctx.shadowColor = "#10b981";
-        ctx.shadowBlur = 10;
+        ctx.moveTo(sp.x, 0);
+        ctx.lineTo(sp.x, sp.y - 12);
+        ctx.strokeStyle = "rgba(168, 85, 247, 0.45)"; // ambient purple laser drop line
+        ctx.lineWidth = 1.2;
         ctx.stroke();
-        
-        // Rotating inner geometric hexagonal vector structure
-        ctx.beginPath();
-        const sides = 6;
-        const angleShift = (digFrame.current * 0.02);
-        for (let s = 0; s <= sides; s++) {
-          const angle = (s / sides) * Math.PI * 2 + angleShift;
-          const sx = px + Math.cos(angle) * (radius * 0.82);
-          const sy = py + Math.sin(angle) * (radius * 0.82);
-          if (s === 0) ctx.moveTo(sx, sy);
-          else ctx.lineTo(sx, sy);
-        }
-        ctx.strokeStyle = "rgba(168, 85, 247, 0.65)"; // neon purple
-        ctx.lineWidth = 1.8;
-        ctx.shadowColor = "#a855f7";
-        ctx.shadowBlur = 8;
-        ctx.stroke();
-        
-        // Pulsating dash tick marks
-        ctx.strokeStyle = "rgba(6, 182, 212, 0.45)"; // cyan cyber details
-        ctx.lineWidth = 1;
-        ctx.setLineDash([4, 6]);
-        ctx.beginPath();
-        ctx.arc(px, py, radius * 0.60, 0, Math.PI * 2);
-        ctx.stroke();
-        ctx.setLineDash([]); // clear dash
 
-        // Radial vortex rays
-        ctx.strokeStyle = "rgba(168, 85, 247, 0.25)";
-        ctx.lineWidth = 0.8;
-        for (let r = 0; r < 8; r++) {
-          const rayAngle = (r / 8) * Math.PI * 2 - angleShift * 0.5;
-          ctx.beginPath();
-          ctx.moveTo(px + Math.cos(rayAngle) * (radius * 0.2), py + Math.sin(rayAngle) * (radius * 0.2));
-          ctx.lineTo(px + Math.cos(rayAngle) * (radius * 0.95), py + Math.sin(rayAngle) * (radius * 0.95));
-          ctx.stroke();
-        }
-        
-        // Expanding gradient core glow
-        const gradient = ctx.createRadialGradient(px, py, 2, px, py, radius * 0.95);
-        gradient.addColorStop(0, "rgba(107, 33, 168, 0.4)"); 
-        gradient.addColorStop(0.5, "rgba(16, 185, 129, 0.12)"); 
-        gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
-        ctx.fillStyle = gradient;
-        ctx.beginPath();
-        ctx.arc(px, py, radius, 0, Math.PI * 2);
-        ctx.fill();
-        
+        ctx.strokeStyle = "rgba(16, 185, 129, 0.7)"; // neon emerald wire core
+        ctx.lineWidth = 0.55;
+        ctx.stroke();
         ctx.restore();
       }
 
@@ -960,21 +927,29 @@ export default function STEMCompanion() {
         const distToSleep = Math.hypot(sleepX - sp.x, sleepY - sp.y);
 
         if (currentMode.current === "wakeup" && wakeupTimer.current > 30) {
-          // Scramble claws along the pocket rim area to pull body up
+          // Crawling climb phase - pull body up relative to current body position
           const sMult = spiderScale.current;
-          leg.footX = sp.x + (leg.side === "left" ? -18 : 18) * sMult + Math.sin(Date.now() * 0.08 + leg.index) * 6 * sMult;
-          leg.footY = 105 + 2 + Math.cos(Date.now() * 0.08 + leg.index) * 8 * sMult;
+          const cycle = Date.now() * 0.018;
+          const legPhase = leg.index * 1.5 + (leg.side === "left" ? 0 : Math.PI);
+          
+          leg.footX = sp.x + (leg.side === "left" ? -20 : 20) * sMult + Math.sin(cycle + legPhase) * 9 * sMult;
+          leg.footY = sp.y + (leg.index - 1.5) * 8 * sMult + Math.cos(cycle + legPhase) * 11 * sMult;
           
           leg.idealX = leg.footX;
           leg.idealY = leg.footY;
+          leg.stepProgress = 1.0;
         } else if (currentMode.current === "sleeping_entry" && sleepEntryTimer.current > 35) {
-          // Crawling climb-in active scamper: grip the pocket opening rim elegantly
+          // Crawling climb-in active scamper - grip and move elegantly relative to current body position!
           const sMult = spiderScale.current;
-          leg.footX = sp.x + (leg.side === "left" ? -20 : 20) * sMult + Math.sin(Date.now() * 0.12 + leg.index) * 7 * sMult;
-          leg.footY = 105 - 12 + Math.cos(Date.now() * 0.12 + leg.index) * 5 * sMult;
+          const cycle = Date.now() * 0.018;
+          const legPhase = leg.index * 1.5 + (leg.side === "left" ? 0 : Math.PI);
+          
+          leg.footX = sp.x + (leg.side === "left" ? -20 : 20) * sMult + Math.sin(cycle + legPhase) * 9 * sMult;
+          leg.footY = sp.y + (leg.index - 1.5) * 8 * sMult + Math.cos(cycle + legPhase) * 11 * sMult;
           
           leg.idealX = leg.footX;
           leg.idealY = leg.footY;
+          leg.stepProgress = 1.0;
         } else if ((currentMode.current === "sleeping" && distToSleep < 16) || (currentMode.current === "sleeping_entry" && sleepEntryTimer.current <= 35)) {
           // Sleeping tucked mode and descending backward: Fold legs snug hugging body frame!
           const sMult = spiderScale.current;
@@ -1174,7 +1149,7 @@ export default function STEMCompanion() {
           ctx.lineTo(10, 0.5);
           ctx.stroke();
 
-          // Draw custom glitch code gesture directly on visor faceplate on pokes
+          // Draw custom glitch code or rude gesture directly on visor faceplate on pokes
           ctx.fillStyle = "#ef4444";
           ctx.font = "bold 6px sans-serif";
           ctx.fillText("🖕", 1, 1);
@@ -1254,7 +1229,7 @@ export default function STEMCompanion() {
         ctx.fillStyle = gradFront;
         ctx.fill();
 
-        // Draw fine silk edge details
+        // Draw fine white silk edge details
         ctx.lineWidth = 1.35;
         ctx.strokeStyle = "rgba(168, 85, 247, 0.85)"; // Neon purple rim
         ctx.stroke();
@@ -1392,4 +1367,4 @@ export default function STEMCompanion() {
       </div>
     </>
   );
-}
+    }
