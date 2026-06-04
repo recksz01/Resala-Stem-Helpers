@@ -38,6 +38,8 @@ export default function LoadingScreen() {
 
     const timer = setTimeout(() => {
       setLoading(false);
+      (window as any).__preloaderFinished = true;
+      window.dispatchEvent(new CustomEvent("preloaderFinished"));
     }, duration);
     
     return () => {
@@ -221,31 +223,48 @@ export default function LoadingScreen() {
           ) : (
             <div className="relative flex flex-col items-center z-20">
               {/* Logo Sequence (Standard) */}
-              <div className="relative mb-12 flex flex-col items-center justify-center overflow-hidden">
-                <motion.span
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-red-500 text-[0.6rem] font-black uppercase tracking-[0.6em] mb-1"
+              <div className="relative mb-8 flex flex-col items-center justify-center">
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.8 }}
+                  className="w-24 h-24 bg-white rounded-3xl flex items-center justify-center p-1.5 shadow-2xl relative mb-4"
                 >
-                  Resala
-                </motion.span>
-                <motion.div 
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex items-center gap-1"
-                >
-                  <span className="text-white text-6xl md:text-7xl font-black tracking-tighter italic leading-none">S</span>
-                  <span className="text-red-500 text-6xl md:text-7xl font-black tracking-tighter italic leading-none">T</span>
-                  <span className="text-white text-6xl md:text-7xl font-black tracking-tighter italic leading-none">EM</span>
+                  <div className="w-full h-full bg-brand-purple rounded-2xl flex items-center justify-center relative overflow-hidden">
+                    <img 
+                      src="/logo.png" 
+                      alt="Resala STEM logo" 
+                      referrerPolicy="no-referrer"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                        const fb = e.currentTarget.parentElement?.querySelector('.logo-fallback');
+                        if (fb) (fb as HTMLElement).style.display = 'flex';
+                      }}
+                      className="w-full h-full object-cover rounded-2xl"
+                    />
+                    <div className="logo-fallback hidden absolute inset-0 bg-brand-purple rounded-2xl items-center justify-center">
+                      <span className="text-white text-base font-black italic tracking-tighter">STEM</span>
+                    </div>
+                  </div>
+                  {/* Outer Pulsing glow */}
+                  <div className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-brand-purple to-red-500 opacity-40 blur-md animate-pulse -z-10" />
                 </motion.div>
+
                 <motion.span
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="text-white text-xs font-black uppercase tracking-[0.4em] mt-2 block opacity-60"
+                  transition={{ delay: 0.2 }}
+                  className="text-white text-lg font-black tracking-tight"
                 >
-                  Helpers
+                  Resala STEM Helpers
+                </motion.span>
+                <motion.span
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="text-red-500 text-[0.6rem] font-black uppercase tracking-[0.3em] mt-1"
+                >
+                  Egypt Hub
                 </motion.span>
               </div>
 
@@ -280,4 +299,4 @@ export default function LoadingScreen() {
       )}
     </AnimatePresence>
   );
-}
+                    }
