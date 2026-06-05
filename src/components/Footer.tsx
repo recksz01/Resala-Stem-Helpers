@@ -18,15 +18,17 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-3 mb-8 group">
-              <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center p-1 group-hover:rotate-6 transition-transform shadow-lg overflow-hidden relative">
-                <div className="w-full h-full bg-brand-purple rounded-xl flex items-center justify-center relative overflow-hidden">
+              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center p-0.5 group-hover:rotate-6 transition-transform shadow-lg overflow-hidden relative">
+                <div className="w-full h-full bg-brand-purple rounded-lg flex items-center justify-center relative overflow-hidden">
                   <img 
-                    src="/logo.png" 
+                    src="/logo-internal.png" 
                     alt="Resala STEM helpers logo" 
                     referrerPolicy="no-referrer"
                     onError={(e) => {
                       const img = e.currentTarget;
-                      if (img.src.endsWith('/logo.png')) {
+                      if (img.src.endsWith('/logo-internal.png')) {
+                        img.src = '/logo.png';
+                      } else if (img.src.endsWith('/logo.png')) {
                         img.src = '/logooo.png';
                       } else {
                         img.style.display = 'none';
@@ -34,10 +36,10 @@ export default function Footer() {
                         if (fb) (fb as HTMLElement).style.display = 'flex';
                       }
                     }}
-                    className="w-full h-full object-cover rounded-xl"
+                    className="w-full h-full object-cover rounded-lg"
                   />
                   {/* Fallback to stylized elegant text if the image file isn't uploaded/found yet */}
-                  <div className="logo-fallback hidden absolute inset-0 bg-brand-purple rounded-xl flex items-center justify-center">
+                  <div className="logo-fallback hidden absolute inset-0 bg-brand-purple rounded-lg flex items-center justify-center">
                     <span className="text-white text-xs font-black italic tracking-tighter relative z-10">S<span className="text-red-500">T</span>EM</span>
                   </div>
                   {/* Internal Glow Effect */}
@@ -111,4 +113,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+                  }
