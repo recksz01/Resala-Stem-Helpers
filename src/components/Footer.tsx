@@ -58,7 +58,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-4">
                {[
-                 { icon: Facebook, href: "https://facebook.com/ResalaSTEM" },
+                 { icon: Facebook, href: "https://www.facebook.com/share/1D6R3CXqHY/" },
                  { icon: Youtube, href: "https://youtube.com/@resalastem-et5vd?si=c-HF-NEhKF4cmB8E" }
                ].map((social, i) => (
                  <a 
@@ -87,7 +87,7 @@ export default function Footer() {
             <h4 className="font-black mb-8 uppercase tracking-[0.2em] text-sm text-red-500">Connect</h4>
             <ul className="space-y-4 font-bold">
               <li><a href="mailto:fly2877@gmail.com" className="text-white/60 hover:text-white transition-colors">fly2877@gmail.com</a></li>
-              <li><a href="https://facebook.com/ResalaSTEM" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">Facebook</a></li>
+              <li><a href="https://www.facebook.com/share/1D6R3CXqHY/" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">Facebook</a></li>
               <li><a href="https://youtube.com/@resalastem-et5vd?si=c-HF-NEhKF4cmB8E" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">YouTube Channel</a></li>
               <li><span className="text-white/30 text-xs">Cairo, Egypt</span></li>
             </ul>
