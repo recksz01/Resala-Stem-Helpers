@@ -88,7 +88,14 @@ export default function Footer() {
           <div>
             <h4 className="font-black mb-8 uppercase tracking-[0.2em] text-sm text-red-500">Connect</h4>
             <ul className="space-y-4 font-bold">
-              <li><a href="mailto:fly2877@gmail.com" className="text-white/60 hover:text-white transition-colors">fly2877@gmail.com</a></li>
+              <li className="flex flex-col gap-1">
+                <a href="mailto:fly2877@gmail.com" className="text-white/60 hover:text-white transition-colors">
+                  fly2877@gmail.com
+                </a>
+                <span className="text-[0.62rem] text-white/35 font-bold tracking-wide">
+                  (إيميل مطور الموقع | Developer's Email)
+                </span>
+              </li>
               <li><a href="https://www.facebook.com/share/1D6R3CXqHY/" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">Facebook</a></li>
               <li><a href="https://youtube.com/@resalastem-et5vd?si=c-HF-NEhKF4cmB8E" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">YouTube Channel</a></li>
               <li><span className="text-white/30 text-xs">Cairo, Egypt</span></li>
@@ -96,14 +103,14 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 text-white/20 text-[0.6rem] font-black uppercase tracking-[0.3em]">
+        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-5 md:gap-8 text-white/20 text-[0.6rem] font-black uppercase tracking-[0.3em]">
           <p>© {currentYear} Resala STEM Helpers Organization.</p>
-          <div className="flex flex-col items-center md:items-start gap-1.5">
-            <div className="flex items-center gap-2">
-              Developed with Integrity by <span className="text-white/60">Omar Sayed Haggag</span>
+          <div className="flex flex-col items-start gap-2.5 text-left">
+            <div className="flex items-center gap-2 text-white/40 text-[0.55rem] font-black uppercase tracking-[0.3em]">
+              Developed with Integrity by <span className="text-white/70">Omar Sayed Haggag</span>
             </div>
-            <div className="flex items-center gap-2 text-white/30 text-[0.55rem]">
-              Deployment assistance by <span className="text-white/50">Omar Afifi</span>
+            <div className="flex items-center gap-2 text-white/40 text-[0.55rem] font-black uppercase tracking-[0.3em]">
+              Deployment assistance by <span className="text-white/70">Omar Afifi</span>
             </div>
           </div>
           <div className="flex items-center gap-1 group">
