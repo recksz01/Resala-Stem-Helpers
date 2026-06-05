@@ -96,8 +96,13 @@ export default function Footer() {
 
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 text-white/20 text-[0.6rem] font-black uppercase tracking-[0.3em]">
           <p>© {currentYear} Resala STEM Helpers Organization.</p>
-          <div className="flex items-center gap-2">
-            Developed with Integrity by <span className="text-white/60">Omar Sayed Haggag</span>
+          <div className="flex flex-col items-center md:items-start gap-1.5">
+            <div className="flex items-center gap-2">
+              Developed with Integrity by <span className="text-white/60">Omar Sayed Haggag</span>
+            </div>
+            <div className="flex items-center gap-2 text-white/30 text-[0.55rem]">
+              Deployment assistance by <span className="text-white/50">Omar Afifi</span>
+            </div>
           </div>
           <div className="flex items-center gap-1 group">
              Made with <Heart size={14} className="text-red-500 fill-red-500 group-hover:scale-125 transition-transform" /> in Egypt
@@ -106,4 +111,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-                   }
+}
