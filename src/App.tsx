@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollProgress from "./components/ScrollProgress";
 import LoadingScreen from "./components/LoadingScreen";
+import STEMCompanion from "./components/STEMCompanion"; // 👈 أضفنا استيراد المرافق البرمجي هنا
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Programs from "./pages/Programs";
@@ -33,6 +34,10 @@ export default function App() {
         <LoadingScreen />
         <ScrollToTop />
         <ScrollProgress />
+        
+        {/* 👈 أضفنا المرافق هنا ليعمل فوق كل الصفحات بشكل انسيابي وبدون حجب النصوص */}
+        <STEMCompanion /> 
+        
         <Navbar />
         <main className="flex-grow">
           <AnimatePresence mode="wait">
