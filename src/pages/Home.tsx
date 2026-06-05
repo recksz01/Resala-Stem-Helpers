@@ -333,127 +333,108 @@ export default function Home() {
         </div>
       </section>
 
-      {/* MASAR Event Banner Section - Sleek Right Aligned Layout with No Image Column */}
+      {/* MASAR Event Banner Section - High-End Premium Featured Experience */}
       <section className="py-24 relative bg-slate-950 overflow-hidden border-y border-slate-900">
+        <div className="absolute inset-0 bg-[#0A0F1D]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(168,85,247,0.15),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(52,211,153,0.08),transparent_50%)]" />
         <div className="absolute -top-32 -left-32 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
-        
-        <div className="container mx-auto px-6 relative z-10 max-w-5xl">
+        <div className="container mx-auto px-6 max-w-5xl relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
-            className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 text-white rounded-[3rem] p-8 md:p-14 shadow-2xl relative overflow-hidden group"
+            className="w-full relative min-h-[460px] flex items-center border border-white/[0.08] rounded-[32px] bg-slate-900/40 backdrop-blur-xl overflow-hidden shadow-2xl p-8 md:p-12 group"
           >
+            {/* Soft Ambient glow behind content layout */}
+            <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] bg-purple-600/15 rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500/40 to-transparent" />
             <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
-            
-            <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-start text-right" dir="rtl">
+
+            <div className="flex flex-col items-start text-left max-w-3xl w-full relative z-10" dir="ltr">
               
-              <div className="inline-flex items-center gap-2.5 px-4.5 py-2 bg-purple-500/10 border border-purple-500/35 rounded-full text-xs font-black text-purple-300 mb-6 uppercase tracking-wider shadow-lg shadow-purple-950/45 text-right self-start">
-                <span className="w-2 h-2 bg-emerald-400 rounded-full animate-ping" />
-                <span>الحدث السنوي الأكبر — مسار القاهرة 2026 (النسخة السابعة)</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-purple-500/10 border border-purple-500/35 rounded-full text-[10px] font-black text-purple-300 mb-6 uppercase tracking-wider shadow-lg shadow-purple-950/45">
+                <span className="w-2 h-2 bg-emerald-400 rounded-full animate-ping shrink-0" />
+                <span>FEATURED ANNUAL EVENT — MASAR CAIRO 2026</span>
               </div>
               
-              <h3 className="text-4xl md:text-6xl font-black tracking-tight mb-5 text-white leading-tight text-right w-full">
-                خطط طريقك نحو <span className="text-transparent bg-clip-text bg-gradient-to-l from-purple-400 via-pink-400 to-emerald-400 font-extrabold drop-shadow">العالمية والتميز</span> الأكاديمي!
+              <h3 className="text-3xl md:text-6xl font-black text-white tracking-tight leading-none mb-3 text-left">
+                MASAR CAIRO 2026
               </h3>
-              
-              <p className="text-slate-300 text-lg md:text-xl font-normal leading-relaxed mb-8 max-w-4xl text-right w-full">
-                يسر جمعيتنا دعوتكم لحضور مهرجان <strong className="text-purple-300 font-black">«مسار القاهرة»</strong> يوم <span className="font-bold border-b-2 border-purple-500/50 pb-0.5">25 / 6</span> على مسرح <span className="text-emerald-300 font-bold">الهوسابير العريق بالقاهرة</span>. حدث تفاعلي ملهم يقودك لعبور اختبارات القبول الدولية والحصول على تمويل دراسي بمشاركة أهم الخبراء الأكاديميين.
+
+              <h4 className="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-emerald-400 mb-6 tracking-tight text-left">
+                Plan Your Path to Global Academic Excellence.
+              </h4>
+
+              <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-6 max-w-2xl text-left">
+                Join our preeminent annual STEM gathering. Discover international student exchanges, scientific research secrets, IELTS/TOEFL/SAT masterclasses, and complete academic mentorship from elite students.
               </p>
 
-              {/* Cosmic Live Countdown Widget - Right Aligned */}
-              <div className="mb-10 w-full flex justify-start" dir="ltr">
-                <div className="flex flex-wrap justify-start gap-4">
-                  {[
-                    { label: "Days", val: timeLeft.days, color: "from-purple-500 to-pink-500" },
-                    { label: "Hours", val: timeLeft.hours, color: "from-pink-500 to-rose-500" },
-                    { label: "Mins", val: timeLeft.minutes, color: "from-rose-500 to-emerald-500" },
-                    { label: "Secs", val: timeLeft.seconds, color: "from-emerald-500 to-teal-500" },
-                  ].map((unit, idx) => (
-                    <div key={idx} className="flex flex-col items-center bg-slate-950/80 border border-slate-800 rounded-2xl px-5 py-3.5 min-w-[85px] relative group overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-br opacity-[0.03] group-hover:opacity-[0.08] transition-opacity" />
-                      <span className="block text-2xl md:text-3xl font-black text-white font-mono tracking-tight leading-none">
-                        {String(unit.val).padStart(2, '0')}
-                      </span>
-                      <span className="block text-[10px] uppercase font-bold tracking-widest text-slate-400 mt-1.5 font-sans">
-                        {unit.label}
-                      </span>
-                      <div className={`absolute bottom-0 inset-x-0 h-[2.5px] bg-gradient-to-r ${unit.color}`} />
-                    </div>
-                  ))}
+              {/* High quality mini-chips representation */}
+              <div className="flex flex-wrap justify-start gap-1.5 mb-8">
+                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-slate-200 hover:bg-white/10 hover:border-purple-500/30 transition-all duration-200">
+                  <Globe size={14} className="text-purple-400" />
+                  <span>Exchange Programs</span>
                 </div>
-              </div>
-              
-              {/* Interactive Dynamic Grid of Core Pillars */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-10 text-right w-full">
-                <div className="flex items-start gap-4 p-5 bg-slate-950/40 border border-slate-850 rounded-2xl hover:border-purple-500/40 hover:bg-slate-950/60 transition-all duration-300 shadow-xl group/card">
-                  <div className="w-11 h-11 bg-purple-500/10 border border-purple-500/20 rounded-xl flex items-center justify-center shrink-0 mt-0.5 shadow-inner">
-                    <Globe className="text-purple-400 group-hover/card:scale-110 transition-transform" size={22} />
-                  </div>
-                  <div>
-                    <h4 className="text-base font-black text-white mb-1.5">برامج التبادل الطلابي الدولي</h4>
-                    <p className="text-xs text-slate-400 leading-relaxed">اكتشف بوابتك إلى برامج التبادل الثقافي والأكاديمي الممولة بالكامل في الخارج لتثري رحلتك.</p>
-                  </div>
+                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-slate-200 hover:bg-white/10 hover:border-emerald-500/30 transition-all duration-200">
+                  <BrainCircuit size={14} className="text-emerald-400" />
+                  <span>Research Opportunities</span>
                 </div>
-
-                <div className="flex items-start gap-4 p-5 bg-slate-950/40 border border-slate-850 rounded-2xl hover:border-emerald-500/40 hover:bg-slate-950/60 transition-all duration-300 shadow-xl group/card">
-                  <div className="w-11 h-11 bg-emerald-500/10 border border-emerald-500/20 rounded-xl flex items-center justify-center shrink-0 mt-0.5 shadow-inner">
-                    <BrainCircuit className="text-emerald-400 group-hover/card:scale-110 transition-transform" size={22} />
-                  </div>
-                  <div>
-                    <h4 className="text-base font-black text-white mb-1.5">أسرار ومجالات البحث العلمي</h4>
-                    <p className="text-xs text-slate-400 leading-relaxed">تعلم خطوات صياغة الأوراق البحثية، والانضمام إلى مختبرات رائدة محليًا وعالميًا بطريقة سلسة.</p>
-                  </div>
+                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-slate-200 hover:bg-white/10 hover:border-cyan-500/30 transition-all duration-200">
+                  <Award size={14} className="text-cyan-400" />
+                  <span>IELTS • TOEFL • SAT</span>
                 </div>
-
-                <div className="flex items-start gap-4 p-5 bg-slate-950/40 border border-slate-850 rounded-2xl hover:border-cyan-500/40 hover:bg-slate-950/60 transition-all duration-300 shadow-xl group/card">
-                  <div className="w-11 h-11 bg-cyan-500/10 border border-cyan-500/20 rounded-xl flex items-center justify-center shrink-0 mt-0.5 shadow-inner">
-                    <Award className="text-cyan-400 group-hover/card:scale-110 transition-transform" size={22} />
-                  </div>
-                  <div>
-                    <h4 className="text-base font-black text-white mb-1.5">اختبارات الكفاءة (IELTS, TOEFL, SAT)</h4>
-                    <p className="text-xs text-slate-400 leading-relaxed">إرشادات واستراتيجيات حقيقية يقدمها ملهمون اجتازوا هذه العقبات وحققوا العلامات الكاملة.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4 p-5 bg-slate-950/40 border border-slate-850 rounded-2xl hover:border-pink-500/40 hover:bg-slate-950/60 transition-all duration-300 shadow-xl group/card">
-                  <div className="w-11 h-11 bg-pink-500/10 border border-pink-500/20 rounded-xl flex items-center justify-center shrink-0 mt-0.5 shadow-inner">
-                    <Users className="text-pink-400 group-hover/card:scale-110 transition-transform" size={22} />
-                  </div>
-                  <div>
-                    <h4 className="text-base font-black text-white mb-1.5">التمكين الدراسي والتطوير العام</h4>
-                    <p className="text-xs text-slate-400 leading-relaxed">حقيبة متكاملة من ورش العمل التنموية لتأهيلك لكتابة خطابات النوايا والسيرة الذاتية المهنية.</p>
-                  </div>
+                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-slate-200 hover:bg-white/10 hover:border-pink-500/30 transition-all duration-200">
+                  <Users size={14} className="text-pink-400" />
+                  <span>Academic Development</span>
                 </div>
               </div>
 
-              {/* Call to actions & venue labels without Learn More button */}
-              <div className="flex flex-col md:flex-row items-center justify-between gap-6 border-t border-white/5 pt-8 w-full">
+              {/* Elegant subtle venue meta labels */}
+              <div className="flex flex-wrap justify-start items-center gap-4 text-xs font-bold text-slate-400 mb-8 border-t border-white/5 pt-5 w-full">
+                <div className="flex items-center gap-2">
+                  <Calendar size={14} className="text-rose-400 animate-pulse" />
+                  <span className="text-slate-200">Thursday, 25 June 2026</span>
+                </div>
+                <span className="text-slate-600 hidden sm:block">|</span>
+                <div className="flex items-center gap-2">
+                  <MapPin size={14} className="text-emerald-400" />
+                  <span className="text-slate-200">Hossaber Theater, Downtown Cairo</span>
+                </div>
+              </div>
+
+              {/* Primary CTA with customized brand gradient (purple-violet-emerald) */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-6 w-full mt-2">
                 <a
                   href="https://wa.me/201030834588"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover-spider-target w-full md:w-auto px-10 py-5 bg-gradient-to-r from-red-650 via-rose-600 to-purple-650 text-white rounded-2xl font-black text-lg transition-transform duration-200 hover:scale-[1.02] active:scale-95 shadow-xl shadow-red-950/35 hover:shadow-red-500/20 text-center flex items-center justify-center gap-2.5 relative overflow-hidden group/btn"
+                  className="hover-spider-target w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-brand-purple via-indigo-600 to-emerald-500 text-white rounded-2xl font-black text-base transition-all duration-250 hover:scale-[1.03] active:scale-95 shadow-xl shadow-purple-950/45 hover:shadow-purple-500/25 text-center flex items-center justify-center gap-2 relative overflow-hidden group/btn"
                 >
                   <span className="absolute inset-0 bg-white/10 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
-                  احجز مقعدك بمسار القاهرة الآن 
-                  <ArrowRight size={22} className="rotate-180" />
+                  Register Now
+                  <ArrowRight size={18} />
                 </a>
-                
-                <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-slate-400 font-medium">
-                  <div className="flex items-center gap-2">
-                    <Calendar size={18} className="text-rose-400 animate-pulse" />
-                    <span className="text-sm font-bold text-slate-200">الخميس، 25 يونيو 2026</span>
-                  </div>
-                  <div className="hidden sm:block text-slate-800">|</div>
-                  <div className="flex items-center gap-2">
-                    <MapPin size={18} className="text-emerald-400" />
-                    <span className="text-sm font-bold text-slate-200">مسرح الهوسابير، وسط البلد بالقاهرة</span>
-                  </div>
+
+                {/* Living premium countdown widget */}
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    { label: "D", val: timeLeft.days, color: "from-purple-500 to-pink-500" },
+                    { label: "H", val: timeLeft.hours, color: "from-pink-500 to-rose-500" },
+                    { label: "M", val: timeLeft.minutes, color: "from-rose-500 to-emerald-500" },
+                    { label: "S", val: timeLeft.seconds, color: "from-emerald-500 to-teal-500" },
+                  ].map((unit, idx) => (
+                    <div key={idx} className="flex flex-col items-center bg-slate-950/80 border border-slate-800/80 rounded-xl px-3 py-1.5 min-w-[55px] relative group overflow-hidden">
+                      <span className="block text-md font-black text-white font-mono tracking-tight leading-none">
+                        {String(unit.val).padStart(2, '0')}
+                      </span>
+                      <span className="block text-[8px] uppercase font-bold tracking-widest text-[#A78BFA] mt-1 font-sans">
+                        {unit.label}
+                      </span>
+                      <div className={`absolute bottom-0 inset-x-0 h-[1.5px] bg-gradient-to-r ${unit.color}`} />
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -511,4 +492,4 @@ export default function Home() {
       </section>
     </div>
   );
-    }
+                                            }
