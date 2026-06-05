@@ -104,14 +104,14 @@ export default function Footer() {
         </div>
 
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-5 md:gap-8 text-white/20 text-[0.6rem] font-black uppercase tracking-[0.3em]">
-          <p>© {currentYear} Resala STEM Helpers Organization.</p>
-          <div className="flex flex-col items-start gap-2.5 text-left">
-            <div className="flex items-center gap-2 text-white/40 text-[0.55rem] font-black uppercase tracking-[0.3em]">
-              Developed with Integrity by <span className="text-white/70">Omar Sayed Haggag</span>
-            </div>
-            <div className="flex items-center gap-2 text-white/40 text-[0.55rem] font-black uppercase tracking-[0.3em]">
-              Deployment assistance by <span className="text-white/70">Omar Afifi</span>
-            </div>
+          <p className="text-center md:text-left">© {currentYear} Resala STEM Helpers Organization.</p>
+          <div className="flex flex-col items-start gap-2 text-left">
+            <p className="text-white/40 text-[0.55rem] font-black uppercase tracking-[0.3em]">
+              Developed with Integrity by <span className="text-white/70 whitespace-nowrap">Omar Sayed Haggag</span>
+            </p>
+            <p className="text-white/40 text-[0.55rem] font-black uppercase tracking-[0.3em]">
+              Deployment assistance by <span className="text-white/70 whitespace-nowrap">Omar Afifi</span>
+            </p>
           </div>
           <div className="flex items-center gap-1 group">
              Made with <Heart size={14} className="text-red-500 fill-red-500 group-hover:scale-125 transition-transform" /> in Egypt
@@ -120,4 +120,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-                  }
+              }
