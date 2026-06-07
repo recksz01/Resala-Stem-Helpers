@@ -18,8 +18,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-3 mb-8 group">
-              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center p-0.5 group-hover:rotate-6 transition-transform shadow-lg overflow-hidden relative">
-                <div className="w-full h-full bg-brand-purple rounded-lg flex items-center justify-center relative overflow-hidden">
+              <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center p-0.5 border border-white/10 group-hover:border-white/30 transition-colors shadow-lg overflow-hidden relative">
+                <div className="w-full h-full bg-slate-900 rounded-xl flex items-center justify-center relative overflow-hidden">
                   <img 
                     src="/logo-internal.png" 
                     alt="Resala STEM helpers logo" 
@@ -36,14 +36,14 @@ export default function Footer() {
                         if (fb) (fb as HTMLElement).style.display = 'flex';
                       }
                     }}
-                    className="w-full h-full object-cover rounded-lg"
+                    className="w-full h-full object-cover rounded-xl"
                   />
                   {/* Fallback to stylized elegant text if the image file isn't uploaded/found yet */}
-                  <div className="logo-fallback hidden absolute inset-0 bg-brand-purple rounded-lg flex items-center justify-center">
-                    <span className="text-white text-xs font-black italic tracking-tighter relative z-10">S<span className="text-red-500">T</span>EM</span>
+                  <div className="logo-fallback hidden absolute inset-0 bg-slate-900 rounded-xl flex items-center justify-center">
+                    <span className="text-white text-xs font-black italic tracking-tighter relative z-10">S<span className="text-brand-purple">T</span>EM</span>
                   </div>
                   {/* Internal Glow Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                 </div>
               </div>
               <div className="flex flex-col">
@@ -120,4 +120,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-              }
+}
