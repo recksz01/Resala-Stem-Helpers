@@ -15,104 +15,8 @@ import { Link } from "react-router-dom";
 import TechGrid from "../components/TechGrid";
 import FloatingIcons from "../components/FloatingIcons";
 
-// بيانات المبدعين المختارين كـ Best Members لشهر مايو 2026 لقائمة الشرف الدوارة
-const MAY_BEST_MEMBERS = [
-  {
-    name: "Jana Mustafa",
-    committee: "HR & Talent Development",
-    committeeAr: "الموارد البشرية",
-    roleAr: "بيست الـ HR ونجمة الجمعية الأولى لشهر مايو 👑",
-    badgeAr: "نجمة الشهر الذهبية الأولى على مستوى الجمعية",
-    color: "from-amber-400 via-yellow-500 to-orange-500",
-    shadow: "shadow-amber-500/10",
-    border: "border-amber-500/30",
-    initials: "JM",
-    category: "overall"
-  },
-  {
-    name: "Omar Sayed",
-    committee: "Public Relations",
-    committeeAr: "العلاقات العامة",
-    roleAr: "بيست العلاقات العامة والاتصال الاستراتيجي ⭐️",
-    badgeAr: "سفير التأثير والاتصال المؤسسي للجمعية",
-    color: "from-purple-500 via-pink-500 to-purple-600",
-    shadow: "shadow-purple-500/10",
-    border: "border-purple-500/25",
-    initials: "OS",
-    category: "pr"
-  },
-  {
-    name: "야나 🦋 (Yana)",
-    committee: "Media Production",
-    committeeAr: "ميديا والإنتاج الإعلامي",
-    roleAr: "بيست ميديا — الإبداع الرقمي وصناعة الصورة 📸",
-    badgeAr: "مستشارة الإعلام المرئي وتغطية الفعاليات",
-    color: "from-blue-500 via-indigo-500 to-blue-600",
-    shadow: "shadow-blue-500/10",
-    border: "border-blue-500/20",
-    initials: "야نا",
-    category: "media"
-  },
-  {
-    name: "Rahma",
-    committee: "Video Editing",
-    committeeAr: "المونتاج وصناعة الفيديو",
-    roleAr: "بيست لجنة المونتاج والتحرير السينمائي 🎬",
-    badgeAr: "صانعة المحتوى المرئي السينمائي الملهم",
-    color: "from-emerald-400 to-teal-600",
-    shadow: "shadow-emerald-500/10",
-    border: "border-emerald-500/20",
-    initials: "R",
-    category: "ve"
-  },
-  {
-    name: "Omar",
-    committee: "Graphic Design",
-    committeeAr: "تصميم الجرافيك والهوية البصرية",
-    roleAr: "بيست الجرافيك وفارس الابتكار البصري 🎨",
-    badgeAr: "صاحب أجمل لمسات البصمة والهوية الفنية",
-    color: "from-cyan-400 to-blue-600",
-    shadow: "shadow-cyan-500/10",
-    border: "border-cyan-500/20",
-    initials: "O",
-    category: "graphic"
-  },
-  {
-    name: "Reem Jamal",
-    committee: "Sales & Sponsorship",
-    committeeAr: "لجنة المبيعات والتمويل",
-    roleAr: "بيست ميمبر مبيعات وقناصة الرعاية والاتفاقيات 💼",
-    badgeAr: "قائدة النمو وجذب الرعاية والشراكات الذهبية",
-    color: "from-rose-400 to-pink-600",
-    shadow: "shadow-rose-500/10",
-    border: "border-rose-500/20",
-    initials: "RJ",
-    category: "sales"
-  },
-  {
-    name: "Yassin Otaka",
-    committee: "Marketing & Sales",
-    committeeAr: "التسويق والمبيعات",
-    roleAr: "بيست الماركتينج وتاني بيست سيلز المشترك 📈",
-    badgeAr: "بطل النمو الرقمي والتواصل التسويقي الذكي",
-    color: "from-fuchsia-500 to-purple-600",
-    shadow: "shadow-fuchsia-500/10",
-    border: "border-fuchsia-500/20",
-    initials: "YO",
-    category: "marketing"
-  }
-];
-
-const PROMOTED_LEADER = {
-  name: "Rodina Mohammed",
-  titleAr: "بشرى ترقية استثنائية مستحقة ومباركة 🎉",
-  badgeAr: "من نائب رئيس العلاقات العامة ➔ رئيس العلاقات العامة والاتصال المؤسسي (Head of PR)",
-  achievement: "تقديراً واعترافاً بمسيرتها الذهبية، وجهودها الاستثنائية وتفانيها غير المحدود كأحد أهم الركائز والقادة في دعم فريق العلاقات العامة والاتصال.",
-  color: "from-teal-400 via-emerald-500 to-cyan-400",
-  shadow: "shadow-emerald-500/20",
-  border: "border-emerald-500/40",
-  initials: "RM"
-};
+// الداتا تم فصلها في ملف hallOfFame.ts زي ما اتفقنا
+import { PROMOTED_LEADER, MAY_BEST_MEMBERS } from "../data/hallOfFame";
 
 export default function Home() {
   const [timeLeft, setTimeLeft] = useState({ days: 22, hours: 3, minutes: 48, seconds: 34 });
@@ -249,7 +153,7 @@ export default function Home() {
       </section>
 
       {/* Hall of Fame Section (Below Hero) */}
-      <section className="py-20 relative bg-slate-50 overflow-hidden border-t border-slate-100">
+      <section className="py-14 relative bg-slate-50 overflow-hidden border-t border-slate-100">
         <div className="container mx-auto px-6 mb-10 text-center md:text-left">
           <div className="inline-flex items-center gap-3 mb-2 px-4 py-2 bg-amber-500/10 rounded-full border border-amber-500/20">
             <Trophy className="text-amber-500" size={20} />
@@ -258,13 +162,13 @@ export default function Home() {
           <h3 className="text-2xl md:text-3xl font-black text-slate-800 mt-2">Honoring this month's exceptional members 🌟</h3>
         </div>
         
-        <div className="container mx-auto px-6">
-          <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-12 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        <div className="w-full">
+          <div className="max-w-[1500px] mx-auto px-6 flex justify-center overflow-x-auto snap-x snap-mandatory gap-6 pb-12 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             
             {/* 1. Rodina Promo */}
-            <div className="snap-start shrink-0 w-[320px] bg-white rounded-[32px] p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col items-center text-center relative overflow-hidden group">
+            <div className="snap-start shrink-0 w-[320px] bg-white rounded-[32px] p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col items-center text-center relative overflow-hidden group transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] cursor-default">
               <div className="absolute top-0 w-full h-2 bg-gradient-to-r from-teal-400 to-cyan-400" />
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-teal-400 via-emerald-500 to-cyan-400 mb-5 flex items-center justify-center text-white font-bold text-2xl shadow-xl shadow-emerald-500/20 group-hover:scale-110 transition-transform">RM</div>
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-teal-400 via-emerald-500 to-cyan-400 mb-5 flex items-center justify-center text-white font-bold text-2xl shadow-xl shadow-emerald-500/20 group-hover:scale-110 transition-transform duration-300">RM</div>
               <span className="px-3 py-1.5 bg-emerald-50 text-emerald-600 rounded-xl text-[10px] font-black tracking-wider uppercase mb-4 shadow-sm border border-emerald-100 flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
                 SPECIAL PROMOTION
@@ -274,26 +178,36 @@ export default function Home() {
             </div>
 
             {/* Loop Best Members */}
-            {MAY_BEST_MEMBERS.map((member, idx) => (
-              <div key={idx} className="snap-start shrink-0 w-[300px] bg-white rounded-[32px] p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col items-center text-center relative overflow-hidden group">
+            {MAY_BEST_MEMBERS.map((member, idx) => {
+              const isOverall = member.category === 'overall';
+              return (
+              <div key={idx} className={`snap-start shrink-0 w-[300px] bg-white rounded-[32px] p-6 border flex flex-col items-center text-center relative overflow-hidden group transition-all duration-300 hover:-translate-y-2 cursor-default ${isOverall ? 'border-amber-300 shadow-[0_12px_40px_rgb(251,191,36,0.2)] hover:shadow-[0_20px_50px_rgb(251,191,36,0.3)] md:scale-105 mx-2' : 'border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)]'}`}>
                 <div className={`absolute top-0 w-full h-2 bg-gradient-to-r ${member.color}`} />
-                <div className={`w-20 h-20 rounded-full bg-gradient-to-br ${member.color} mb-5 flex items-center justify-center text-white font-bold text-2xl shadow-xl ${member.shadow} group-hover:scale-110 transition-transform`}>
+                <div className={`w-20 h-20 rounded-full bg-gradient-to-br ${member.color} mb-5 flex items-center justify-center text-white font-bold text-2xl shadow-xl ${member.shadow} group-hover:scale-110 transition-transform duration-300`}>
                   {member.initials}
                 </div>
-                <span className={`px-3 py-1.5 bg-slate-50 text-slate-500 border border-slate-100 rounded-xl text-[10px] font-black tracking-wider uppercase mb-4 shadow-sm line-clamp-1`}>
-                  {member.category.replace('_', ' ')} / BEST MEMBER
-                </span>
+                
+                {isOverall ? (
+                  <span className="px-3 py-1.5 bg-amber-50 text-amber-600 border border-amber-200 rounded-xl text-[10px] font-black tracking-wider uppercase mb-4 shadow-sm flex items-center gap-1.5">
+                    👑 Overall Winner
+                  </span>
+                ) : (
+                  <span className="px-3 py-1.5 bg-slate-50 text-slate-500 border border-slate-100 rounded-xl text-[10px] font-black tracking-wider uppercase mb-4 shadow-sm line-clamp-1">
+                    {member.category.replace('_', ' ')} / BEST MEMBER
+                  </span>
+                )}
+                
                 <h3 className="text-xl font-black text-slate-800 mb-1">{member.name}</h3>
                 <p className="text-slate-400 font-medium text-sm mt-1">{member.committee}</p>
               </div>
-            ))}
+            )})}
           </div>
         </div>
       </section>
 
       {/* MASAR Event Banner Section - Soft & Harmonious Event Experience */}
       <section className="py-24 relative bg-white">
-        <div className="container mx-auto px-6 max-w-5xl relative z-10">
+        <div className="container mx-auto px-6 max-w-4xl relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -448,4 +362,4 @@ export default function Home() {
       </section>
     </div>
   );
-                     }
+                        }
