@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { 
   ArrowRight, 
-  BookOpen, 
   Users, 
   BrainCircuit, 
   Cpu, 
@@ -140,88 +139,9 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-white overflow-hidden pt-36 md:pt-[140px]">
-      {/* Best Members Holographic Auto-Scrolling Marquee Ticker */}
-      <div id="best-members-marquee" className="bg-gradient-to-r from-slate-950 via-purple-950/40 to-slate-950 border-y border-purple-900/15 py-2.5 relative overflow-hidden z-20 flex items-center shadow-[0_4px_25px_rgba(0,0,0,0.5)]" dir="ltr">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.12),transparent_70%)] pointer-events-none" />
-        
-        {/* Fixed Title Label (Glow Badge) */}
-        <div className="px-2.5 md:px-4 shrink-0 bg-slate-950/90 border-r border-slate-920 flex items-center gap-1.5 md:gap-2 relative z-10 font-[900] text-[10px] md:text-xs select-none text-white tracking-widest">
-          <Trophy size={14} className="text-amber-400 animate-bounce shrink-0" />
-          <span className="text-amber-400 font-sans uppercase font-[900] tracking-widest leading-none">HALL OF FAME 👑</span>
-        </div>
-
-        {/* Marquee Loop scrolling horizontally */}
-        <div className="flex-1 overflow-hidden relative flex items-center" dir="ltr">
-          <div className="animate-marquee flex whitespace-nowrap gap-16 text-xs font-bold text-slate-300 md:text-sm pl-8 w-max shrink-0">
-            {[...Array(2)].map((_, loopIdx) => (
-              <div key={loopIdx} className="flex items-center gap-16 select-none shrink-0 w-max" dir="ltr">
-                {/* 1. Rodina Promo */}
-                <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-900/80 border border-emerald-500/30 rounded-xl">
-                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-ping shrink-0" />
-                  <span className="px-1.5 py-0.5 bg-emerald-500/15 text-emerald-300 rounded-md text-[9.5px] font-black tracking-wider uppercase">SPECIAL PROMOTION 🎉</span>
-                  <span className="text-white font-[900] text-sm tracking-wide">{PROMOTED_LEADER.name}</span>
-                  <span className="text-emerald-400 font-bold text-sm">➔ Head of PR</span>
-                </div>
-
-                {/* 2. Jana Mustafa */}
-                <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-900/80 border border-amber-500/30 rounded-xl">
-                  <span className="text-amber-400 text-sm shrink-0">👑</span>
-                  <span className="px-1.5 py-0.5 bg-amber-500/15 text-amber-300 rounded-md text-[9.5px] font-black tracking-wider uppercase">OVERALL BEST MEMBER</span>
-                  <span className="text-white font-[900] text-sm tracking-wide">Jana Mustafa</span>
-                  <span className="text-slate-300 font-medium">/ HR</span>
-                </div>
-
-                {/* 3. Omar Sayed */}
-                <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-900/80 border border-purple-500/30 rounded-xl">
-                  <span className="text-purple-400 text-sm shrink-0">⭐️</span>
-                  <span className="px-1.5 py-0.5 bg-purple-500/15 text-purple-300 rounded-md text-[9.5px] font-black tracking-wider uppercase">BEST MEMBER PR</span>
-                  <span className="text-white font-[900] text-sm tracking-wide">Omar Sayed</span>
-                  <span className="text-slate-300 font-medium">/ Public Relations</span>
-                </div>
-
-                {/* 4. Yana */}
-                <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-900/80 border border-blue-500/30 rounded-xl">
-                  <span className="text-blue-400 text-sm shrink-0">📸</span>
-                  <span className="px-1.5 py-0.5 bg-blue-500/15 text-blue-300 rounded-md text-[9.5px] font-black tracking-wider uppercase">BEST MEMBER PR Media</span>
-                  <span className="text-white font-[900] text-sm tracking-wide">야نا (Yana) 🦋</span>
-                </div>
-
-                {/* 5. Rahma */}
-                <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-900/80 border border-emerald-500/30 rounded-xl">
-                  <span className="text-emerald-400 text-sm shrink-0">🎬</span>
-                  <span className="px-1.5 py-0.5 bg-emerald-500/15 text-emerald-300 rounded-md text-[9.5px] font-black tracking-wider uppercase">BEST VIDEO EDITING</span>
-                  <span className="text-white font-[900] text-sm tracking-wide">Rahma</span>
-                </div>
-
-                {/* 6. Omar */}
-                <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-900/80 border border-cyan-500/30 rounded-xl">
-                  <span className="text-cyan-400 text-sm shrink-0">🎨</span>
-                  <span className="px-1.5 py-0.5 bg-cyan-500/15 text-cyan-300 rounded-md text-[9.5px] font-black tracking-wider uppercase">BEST GRAPHIC DESIGN</span>
-                  <span className="text-white font-[900] text-sm tracking-wide">Omar</span>
-                </div>
-
-                {/* 7. Reem Jamal */}
-                <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-900/80 border border-rose-500/30 rounded-xl">
-                  <span className="text-rose-400 text-sm shrink-0">💼</span>
-                  <span className="px-1.5 py-0.5 bg-rose-500/15 text-rose-300 rounded-md text-[9.5px] font-black tracking-wider uppercase">BEST SALES & CORPs</span>
-                  <span className="text-white font-[900] text-sm tracking-wide">Reem Jamal</span>
-                </div>
-
-                {/* 8. Yassin Otaka */}
-                <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-900/80 border border-fuchsia-400/30 rounded-xl">
-                  <span className="text-fuchsia-400 text-sm shrink-0">📈</span>
-                  <span className="px-1.5 py-0.5 bg-fuchsia-500/15 text-fuchsia-300 rounded-md text-[9.5px] font-black tracking-wider uppercase">BEST MARKETING</span>
-                  <span className="text-white font-[900] text-sm tracking-wide">Yassin Otaka</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
+    <div className="bg-white overflow-hidden pt-24 md:pt-[100px]">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-slate-50">
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-white">
         <TechGrid />
         <FloatingIcons />
         
@@ -328,91 +248,130 @@ export default function Home() {
         </div>
       </section>
 
-      {/* MASAR Event Banner Section - Soft & Harmonious Event Experience */}
-      <section className="py-24 relative bg-slate-950 overflow-hidden border-y border-slate-900">
-        <div className="absolute inset-0 bg-[#0B0A12]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(124,58,237,0.08),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(16,185,129,0.05),transparent_50%)]" />
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-brand-purple/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
+      {/* Hall of Fame Section (Below Hero) */}
+      <section className="py-20 relative bg-slate-50 overflow-hidden border-t border-slate-100">
+        <div className="container mx-auto px-6 mb-10 text-center md:text-left">
+          <div className="inline-flex items-center gap-3 mb-2 px-4 py-2 bg-amber-500/10 rounded-full border border-amber-500/20">
+            <Trophy className="text-amber-500" size={20} />
+            <h2 className="text-sm font-black uppercase tracking-widest text-brand-purple">Hall of Fame</h2>
+          </div>
+          <h3 className="text-2xl md:text-3xl font-black text-slate-800 mt-2">Honoring this month's exceptional members 🌟</h3>
+        </div>
         
+        <div className="container mx-auto px-6">
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-12 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            
+            {/* 1. Rodina Promo */}
+            <div className="snap-start shrink-0 w-[320px] bg-white rounded-[32px] p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col items-center text-center relative overflow-hidden group">
+              <div className="absolute top-0 w-full h-2 bg-gradient-to-r from-teal-400 to-cyan-400" />
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-teal-400 via-emerald-500 to-cyan-400 mb-5 flex items-center justify-center text-white font-bold text-2xl shadow-xl shadow-emerald-500/20 group-hover:scale-110 transition-transform">RM</div>
+              <span className="px-3 py-1.5 bg-emerald-50 text-emerald-600 rounded-xl text-[10px] font-black tracking-wider uppercase mb-4 shadow-sm border border-emerald-100 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                SPECIAL PROMOTION
+              </span>
+              <h3 className="text-xl font-black text-slate-800 mb-1">{PROMOTED_LEADER.name}</h3>
+              <p className="text-emerald-500 font-bold text-sm bg-emerald-50 px-3 py-1 rounded-full mt-2">Head of PR</p>
+            </div>
+
+            {/* Loop Best Members */}
+            {MAY_BEST_MEMBERS.map((member, idx) => (
+              <div key={idx} className="snap-start shrink-0 w-[300px] bg-white rounded-[32px] p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col items-center text-center relative overflow-hidden group">
+                <div className={`absolute top-0 w-full h-2 bg-gradient-to-r ${member.color}`} />
+                <div className={`w-20 h-20 rounded-full bg-gradient-to-br ${member.color} mb-5 flex items-center justify-center text-white font-bold text-2xl shadow-xl ${member.shadow} group-hover:scale-110 transition-transform`}>
+                  {member.initials}
+                </div>
+                <span className={`px-3 py-1.5 bg-slate-50 text-slate-500 border border-slate-100 rounded-xl text-[10px] font-black tracking-wider uppercase mb-4 shadow-sm line-clamp-1`}>
+                  {member.category.replace('_', ' ')} / BEST MEMBER
+                </span>
+                <h3 className="text-xl font-black text-slate-800 mb-1">{member.name}</h3>
+                <p className="text-slate-400 font-medium text-sm mt-1">{member.committee}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* MASAR Event Banner Section - Soft & Harmonious Event Experience */}
+      <section className="py-24 relative bg-white">
         <div className="container mx-auto px-6 max-w-5xl relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
-            className="w-full relative min-h-[460px] flex items-center border border-white/[0.05] rounded-[32px] bg-slate-900/50 backdrop-blur-xl overflow-hidden shadow-2xl p-8 md:p-12 group"
+            className="w-full relative min-h-[320px] flex items-center rounded-[40px] bg-gradient-to-br from-brand-purple to-red-500 overflow-hidden shadow-2xl shadow-brand-purple/20 p-8 md:p-12 group"
           >
             {/* Soft Ambient glow behind content layout */}
-            <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] bg-brand-purple/15 rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-purple/30 to-transparent" />
-            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
+            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10" />
+            <div className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-red-400/40 rounded-full blur-[120px] pointer-events-none" />
 
             <div className="flex flex-col items-start text-left max-w-3xl w-full relative z-10" dir="ltr">
               
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-slate-800/60 border border-slate-700 rounded-full text-[10px] font-bold text-slate-300 mb-6 uppercase tracking-wider shadow-lg">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-[10px] font-bold text-white mb-6 uppercase tracking-wider shadow-lg">
                 <div className="relative flex h-2 w-2 shrink-0">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-slate-400"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
                 </div>
                 <span>FEATURED ANNUAL EVENT — MASAR CAIRO 2026</span>
               </div>
               
-              <h3 className="text-3xl md:text-6xl font-black text-white tracking-tight leading-none mb-3 text-left">
+              <h3 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-none mb-4 text-left">
                 MASAR CAIRO 2026
-               </h3>
+              </h3>
 
-              <h4 className="text-xl md:text-2xl font-bold text-slate-300 mb-6 tracking-tight text-left">
+              <h4 className="text-lg md:text-xl font-bold text-white/90 mb-6 tracking-tight text-left">
                 Plan Your Path to Global Academic Excellence.
               </h4>
 
-              <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-6 max-w-2xl text-left font-medium">
+              <p className="text-white/80 text-sm md:text-base leading-relaxed mb-8 max-w-2xl text-left font-medium">
                 Join our preeminent annual STEM gathering. Discover international student exchanges, scientific research secrets, IELTS/TOEFL/SAT masterclasses, and complete academic mentorship from elite students.
               </p>
 
               {/* High quality mini-chips representation */}
-              <div className="flex flex-wrap justify-start gap-1.5 mb-8">
-                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-slate-200 hover:bg-white/10 hover:border-slate-500/30 transition-all duration-200">
-                  <Globe size={14} className="text-slate-400" />
+              <div className="flex flex-wrap justify-start gap-2 mb-8">
+                <div className="flex items-center gap-1.5 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-xs font-bold text-white hover:bg-white/20 transition-all duration-200">
+                  <Globe size={14} className="text-white shrink-0" />
                   <span>Exchange Programs</span>
                 </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-slate-200 hover:bg-white/10 hover:border-slate-500/30 transition-all duration-200">
-                  <BrainCircuit size={14} className="text-slate-400" />
+                <div className="flex items-center gap-1.5 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-xs font-bold text-white hover:bg-white/20 transition-all duration-200">
+                  <BrainCircuit size={14} className="text-white shrink-0" />
                   <span>Research Opportunities</span>
                 </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-slate-200 hover:bg-white/10 hover:border-slate-500/30 transition-all duration-200">
-                  <Award size={14} className="text-slate-400" />
+                <div className="flex items-center gap-1.5 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-xs font-bold text-white hover:bg-white/20 transition-all duration-200">
+                  <Award size={14} className="text-white shrink-0" />
                   <span>IELTS • TOEFL • SAT</span>
                 </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-slate-200 hover:bg-white/10 hover:border-slate-500/30 transition-all duration-200">
-                  <Users size={14} className="text-slate-400" />
+                <div className="flex items-center gap-1.5 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-xs font-bold text-white hover:bg-white/20 transition-all duration-200">
+                  <Users size={14} className="text-white shrink-0" />
                   <span>Academic Development</span>
                 </div>
               </div>
 
               {/* Elegant subtle venue meta labels */}
-              <div className="flex flex-wrap justify-start items-center gap-4 text-xs font-bold text-slate-300 mb-8 border-t border-white/5 pt-5 w-full">
+              <div className="flex flex-wrap justify-start items-center gap-4 text-xs font-bold text-white/90 mb-8 w-full border-t border-white/20 pt-6">
                 <div className="flex items-center gap-2">
-                  <Calendar size={14} className="text-slate-400" />
+                  <Calendar size={15} className="text-white shrink-0" />
                   <span>Thursday, 25 June 2026</span>
                 </div>
-                <span className="text-slate-600 hidden sm:block">|</span>
+                <span className="text-white/40 hidden sm:block">|</span>
                 <div className="flex items-center gap-2">
-                  <MapPin size={14} className="text-slate-400" />
+                  <MapPin size={15} className="text-white shrink-0" />
                   <span>Hossaber Theater, Downtown Cairo</span>
                 </div>
               </div>
 
               {/* Primary CTA with customized brand gradient */}
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-6 w-full mt-2">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-6 w-full">
                 <a
                   href="https://wa.me/201030834588"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-10 py-4 bg-slate-800 border border-slate-700 text-slate-200 rounded-2xl font-bold text-base transition-all duration-250 hover:bg-slate-700 hover:text-white hover:scale-[1.03] active:scale-95 shadow-xl text-center flex items-center justify-center gap-2 group/btn"
+                  className="w-full sm:w-auto px-10 py-4 bg-white text-brand-purple rounded-2xl font-black text-base transition-all duration-250 hover:scale-[1.03] active:scale-95 shadow-xl text-center flex items-center justify-center gap-2 group/btn relative overflow-hidden"
                 >
-                  Register Now
-                  <ArrowRight size={18} className="text-slate-400 group-hover/btn:text-white transition-colors" />
+                  <span className="relative z-10 flex items-center gap-2">
+                    Register Now
+                    <ArrowRight size={18} className="text-brand-purple group-hover/btn:translate-x-1 transition-transform" />
+                  </span>
                 </a>
 
                 {/* Living premium countdown widget */}
@@ -423,14 +382,13 @@ export default function Home() {
                     { label: "M", val: timeLeft.minutes },
                     { label: "S", val: timeLeft.seconds },
                   ].map((unit, idx) => (
-                    <div key={idx} className="flex flex-col items-center bg-slate-900 border border-white/10 rounded-xl px-3 py-1.5 min-w-[55px] relative overflow-hidden group">
-                      <span className="block text-md font-black text-white font-mono tracking-tight leading-none relative z-10">
+                    <div key={idx} className="flex flex-col items-center bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-3 py-2 min-w-[60px] relative overflow-hidden">
+                      <span className="block text-xl font-black text-white font-mono tracking-tight leading-none relative z-10">
                         {String(unit.val).padStart(2, '0')}
                       </span>
-                      <span className="block text-[8px] uppercase font-bold tracking-widest text-brand-purple mt-1 font-sans relative z-10">
+                      <span className="block text-[9px] uppercase font-bold tracking-widest text-white/70 mt-1 font-sans relative z-10">
                         {unit.label}
                       </span>
-                      <div className="absolute bottom-0 left-0 w-full h-[20%] bg-gradient-to-t from-brand-purple/20 to-transparent" />
                     </div>
                   ))}
                 </div>
@@ -490,4 +448,4 @@ export default function Home() {
       </section>
     </div>
   );
-  }
+                     }
