@@ -14,8 +14,6 @@ import {
 import { Link } from "react-router-dom";
 import TechGrid from "../components/TechGrid";
 import FloatingIcons from "../components/FloatingIcons";
-
-// الداتا تم فصلها في ملف hallOfFame.ts زي ما اتفقنا
 import { PROMOTED_LEADER, MAY_BEST_MEMBERS } from "../data/hallOfFame";
 
 export default function Home() {
@@ -163,7 +161,7 @@ export default function Home() {
         </div>
         
         <div className="w-full">
-          <div className="max-w-[1500px] mx-auto px-6 flex justify-center overflow-x-auto snap-x snap-mandatory gap-6 pb-12 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          <div className="max-w-[1500px] mx-auto px-6 flex overflow-x-auto snap-x snap-mandatory gap-6 pb-12 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             
             {/* 1. Rodina Promo */}
             <div className="snap-start shrink-0 w-[320px] bg-white rounded-[32px] p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col items-center text-center relative overflow-hidden group transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] cursor-default">
@@ -231,7 +229,7 @@ export default function Home() {
               
               <h3 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-none mb-4 text-left">
                 MASAR CAIRO 2026
-              </h3>
+               </h3>
 
               <h4 className="text-lg md:text-xl font-bold text-white/90 mb-6 tracking-tight text-left">
                 Plan Your Path to Global Academic Excellence.
