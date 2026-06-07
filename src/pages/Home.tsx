@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { 
@@ -335,70 +330,76 @@ export default function Home() {
 
       {/* MASAR Event Banner Section - Soft & Harmonious Event Experience */}
       <section className="py-24 relative bg-slate-950 overflow-hidden border-y border-slate-900">
-        <div className="absolute inset-0 bg-[#0A0F1D]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(148,163,184,0.05),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[#0B0A12]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(124,58,237,0.08),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(16,185,129,0.05),transparent_50%)]" />
+        <div className="absolute -top-32 -left-32 w-96 h-96 bg-brand-purple/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
+        
         <div className="container mx-auto px-6 max-w-5xl relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
-            className="w-full relative min-h-[460px] flex items-center border border-slate-800 rounded-[32px] bg-slate-900/50 backdrop-blur-xl overflow-hidden shadow-2xl p-8 md:p-12 group"
+            className="w-full relative min-h-[460px] flex items-center border border-white/[0.05] rounded-[32px] bg-slate-900/50 backdrop-blur-xl overflow-hidden shadow-2xl p-8 md:p-12 group"
           >
             {/* Soft Ambient glow behind content layout */}
-            <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] bg-slate-800/30 rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-700/50 to-transparent" />
-            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-800/50 to-transparent" />
+            <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] bg-brand-purple/15 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-purple/30 to-transparent" />
+            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
 
             <div className="flex flex-col items-start text-left max-w-3xl w-full relative z-10" dir="ltr">
               
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-slate-800/60 border border-slate-700 rounded-full text-[10px] font-bold text-slate-300 mb-6 uppercase tracking-wider shadow-lg shadow-slate-950/45">
-                <span className="w-2 h-2 bg-slate-400 rounded-full shrink-0" />
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-slate-800/60 border border-slate-700 rounded-full text-[10px] font-bold text-slate-300 mb-6 uppercase tracking-wider shadow-lg">
+                <div className="relative flex h-2 w-2 shrink-0">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-slate-400"></span>
+                </div>
                 <span>FEATURED ANNUAL EVENT — MASAR CAIRO 2026</span>
               </div>
               
               <h3 className="text-3xl md:text-6xl font-black text-white tracking-tight leading-none mb-3 text-left">
                 MASAR CAIRO 2026
-              </h3>
+               </h3>
 
               <h4 className="text-xl md:text-2xl font-bold text-slate-300 mb-6 tracking-tight text-left">
                 Plan Your Path to Global Academic Excellence.
               </h4>
 
-              <p className="text-slate-400 text-sm md:text-base leading-relaxed mb-6 max-w-2xl text-left font-medium">
+              <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-6 max-w-2xl text-left font-medium">
                 Join our preeminent annual STEM gathering. Discover international student exchanges, scientific research secrets, IELTS/TOEFL/SAT masterclasses, and complete academic mentorship from elite students.
               </p>
 
               {/* High quality mini-chips representation */}
               <div className="flex flex-wrap justify-start gap-1.5 mb-8">
-                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-slate-300 hover:bg-white/10 hover:border-slate-500/30 transition-all duration-200">
+                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-slate-200 hover:bg-white/10 hover:border-slate-500/30 transition-all duration-200">
                   <Globe size={14} className="text-slate-400" />
                   <span>Exchange Programs</span>
                 </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-slate-300 hover:bg-white/10 hover:border-slate-500/30 transition-all duration-200">
+                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-slate-200 hover:bg-white/10 hover:border-slate-500/30 transition-all duration-200">
                   <BrainCircuit size={14} className="text-slate-400" />
                   <span>Research Opportunities</span>
                 </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-slate-300 hover:bg-white/10 hover:border-slate-500/30 transition-all duration-200">
+                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-slate-200 hover:bg-white/10 hover:border-slate-500/30 transition-all duration-200">
                   <Award size={14} className="text-slate-400" />
                   <span>IELTS • TOEFL • SAT</span>
                 </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-slate-300 hover:bg-white/10 hover:border-slate-500/30 transition-all duration-200">
+                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-slate-200 hover:bg-white/10 hover:border-slate-500/30 transition-all duration-200">
                   <Users size={14} className="text-slate-400" />
                   <span>Academic Development</span>
                 </div>
               </div>
 
               {/* Elegant subtle venue meta labels */}
-              <div className="flex flex-wrap justify-start items-center gap-4 text-xs font-bold text-slate-400 mb-8 border-t border-slate-800 pt-5 w-full">
+              <div className="flex flex-wrap justify-start items-center gap-4 text-xs font-bold text-slate-300 mb-8 border-t border-white/5 pt-5 w-full">
                 <div className="flex items-center gap-2">
                   <Calendar size={14} className="text-slate-400" />
-                  <span className="text-slate-300">Thursday, 25 June 2026</span>
+                  <span>Thursday, 25 June 2026</span>
                 </div>
                 <span className="text-slate-600 hidden sm:block">|</span>
                 <div className="flex items-center gap-2">
                   <MapPin size={14} className="text-slate-400" />
-                  <span className="text-slate-300">Hossaber Theater, Downtown Cairo</span>
+                  <span>Hossaber Theater, Downtown Cairo</span>
                 </div>
               </div>
 
@@ -408,10 +409,10 @@ export default function Home() {
                   href="https://wa.me/201030834588"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-10 py-4 bg-slate-800 text-white rounded-2xl font-bold text-base transition-all duration-250 hover:bg-slate-700 hover:scale-[1.03] active:scale-95 shadow-xl border border-slate-700 text-center flex items-center justify-center gap-2 group/btn"
+                  className="w-full sm:w-auto px-10 py-4 bg-slate-800 border border-slate-700 text-slate-200 rounded-2xl font-bold text-base transition-all duration-250 hover:bg-slate-700 hover:text-white hover:scale-[1.03] active:scale-95 shadow-xl text-center flex items-center justify-center gap-2 group/btn"
                 >
                   Register Now
-                  <ArrowRight size={18} />
+                  <ArrowRight size={18} className="text-slate-400 group-hover/btn:text-white transition-colors" />
                 </a>
 
                 {/* Living premium countdown widget */}
@@ -422,13 +423,14 @@ export default function Home() {
                     { label: "M", val: timeLeft.minutes },
                     { label: "S", val: timeLeft.seconds },
                   ].map((unit, idx) => (
-                    <div key={idx} className="flex flex-col items-center bg-slate-900 border border-slate-800 rounded-xl px-3 py-1.5 min-w-[55px] relative">
-                      <span className="block text-md font-black text-slate-200 font-mono tracking-tight leading-none">
+                    <div key={idx} className="flex flex-col items-center bg-slate-900 border border-white/10 rounded-xl px-3 py-1.5 min-w-[55px] relative overflow-hidden group">
+                      <span className="block text-md font-black text-white font-mono tracking-tight leading-none relative z-10">
                         {String(unit.val).padStart(2, '0')}
                       </span>
-                      <span className="block text-[8px] uppercase font-bold tracking-widest text-slate-500 mt-1 font-sans">
+                      <span className="block text-[8px] uppercase font-bold tracking-widest text-brand-purple mt-1 font-sans relative z-10">
                         {unit.label}
                       </span>
+                      <div className="absolute bottom-0 left-0 w-full h-[20%] bg-gradient-to-t from-brand-purple/20 to-transparent" />
                     </div>
                   ))}
                 </div>
