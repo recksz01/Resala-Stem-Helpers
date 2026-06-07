@@ -1,7 +1,13 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { 
   ArrowRight, 
+  BookOpen, 
   Users, 
   BrainCircuit, 
   Cpu, 
@@ -14,6 +20,7 @@ import {
 import { Link } from "react-router-dom";
 import TechGrid from "../components/TechGrid";
 import FloatingIcons from "../components/FloatingIcons";
+
 import { PROMOTED_LEADER, MAY_BEST_MEMBERS } from "../data/hallOfFame";
 
 export default function Home() {
@@ -229,7 +236,7 @@ export default function Home() {
               
               <h3 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-none mb-4 text-left">
                 MASAR CAIRO 2026
-               </h3>
+              </h3>
 
               <h4 className="text-lg md:text-xl font-bold text-white/90 mb-6 tracking-tight text-left">
                 Plan Your Path to Global Academic Excellence.
@@ -360,4 +367,4 @@ export default function Home() {
       </section>
     </div>
   );
-                }
+            }
