@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { 
@@ -218,7 +213,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
-            className="w-full relative min-h-[320px] flex items-center rounded-[40px] bg-gradient-to-br from-brand-purple to-red-500 overflow-hidden shadow-2xl shadow-brand-purple/20 p-8 md:p-12 group"
+            className="w-full relative min-h-[320px] flex items-center rounded-[40px] bg-gradient-to-r from-brand-purple via-purple-600 to-red-500 overflow-hidden shadow-2xl shadow-brand-purple/20 p-8 md:p-12 group"
           >
             {/* Soft Ambient glow behind content layout */}
             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10" />
