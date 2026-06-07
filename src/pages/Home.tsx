@@ -1,3 +1,8 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { 
@@ -213,18 +218,17 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
-            className="w-full relative min-h-[320px] flex items-center rounded-[40px] bg-gradient-to-r from-brand-purple via-purple-600 to-red-500 overflow-hidden shadow-2xl shadow-brand-purple/20 p-8 md:p-12 group"
+            className="w-full relative min-h-[320px] flex items-center rounded-[40px] bg-brand-purple overflow-hidden shadow-xl p-8 md:p-12 group"
           >
-            {/* Soft Ambient glow behind content layout */}
-            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10" />
-            <div className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-red-400/40 rounded-full blur-[120px] pointer-events-none" />
+            {/* Subtle overlay for depth */}
+            <div className="absolute inset-0 bg-black/5" />
 
             <div className="flex flex-col items-start text-left max-w-3xl w-full relative z-10" dir="ltr">
               
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-[10px] font-bold text-white mb-6 uppercase tracking-wider shadow-lg">
                 <div className="relative flex h-2 w-2 shrink-0">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                 </div>
                 <span>FEATURED ANNUAL EVENT — MASAR CAIRO 2026</span>
               </div>
@@ -280,11 +284,11 @@ export default function Home() {
                   href="https://wa.me/201030834588"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-10 py-4 bg-white text-brand-purple rounded-2xl font-black text-base transition-all duration-250 hover:scale-[1.03] active:scale-95 shadow-xl text-center flex items-center justify-center gap-2 group/btn relative overflow-hidden"
+                  className="w-full sm:w-auto px-10 py-4 bg-white text-brand-purple hover:text-red-600 rounded-2xl font-black text-base transition-all duration-250 hover:scale-[1.03] active:scale-95 shadow-xl text-center flex items-center justify-center gap-2 group/btn relative overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center gap-2">
                     Register Now
-                    <ArrowRight size={18} className="text-brand-purple group-hover/btn:translate-x-1 transition-transform" />
+                    <ArrowRight size={18} className="text-brand-purple group-hover/btn:text-red-600 group-hover/btn:translate-x-1 transition-all" />
                   </span>
                 </a>
 
@@ -362,4 +366,4 @@ export default function Home() {
       </section>
     </div>
   );
-            }
+                                }
