@@ -24,7 +24,11 @@ import FloatingIcons from "../components/FloatingIcons";
 import { PROMOTED_LEADER, MAY_BEST_MEMBERS } from "../data/hallOfFame";
 
 export default function Home() {
-  const [timeLeft, setTimeLeft] = useState({ days: 22, hours: 3, minutes: 48, seconds: 34 });
+  const [isEventPassed, setIsEventPassed] = useState(() => {
+    const eventDate = new Date("2026-06-25T09:00:00").getTime();
+    return Date.now() >= eventDate;
+  });
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
     const eventDate = new Date("2026-06-25T09:00:00").getTime();
@@ -39,6 +43,9 @@ export default function Home() {
         const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
         const s = Math.floor((difference % (1000 * 60)) / 1000);
         setTimeLeft({ days: d, hours: h, minutes: m, seconds: s });
+        setIsEventPassed(false);
+      } else {
+        setIsEventPassed(true);
       }
     };
 
@@ -50,7 +57,7 @@ export default function Home() {
   return (
     <div className="bg-white overflow-hidden pt-24 md:pt-[100px]">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-white">
+      <section className="relative min-h-screen md:min-h-[80vh] flex items-center overflow-hidden bg-white">
         <TechGrid />
         <FloatingIcons />
         
@@ -72,13 +79,13 @@ export default function Home() {
               className="text-6xl md:text-9xl font-black tracking-tighter text-brand-purple leading-[0.88] mb-8"
             >
               Building the <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-red-500 animate-gradient-x relative">
+              <span className="text-red-500 relative">
                 Future
                 <motion.span 
                   initial={{ width: 0 }}
                   whileInView={{ width: "100%" }}
-                  transition={{ delay: 1, duration: 0.8 }}
-                  className="absolute bottom-2 left-0 h-4 bg-red-100 -z-10"
+                  transition={{ delay: 0.6, duration: 0.8 }}
+                  className="absolute bottom-2 left-0 h-4 bg-red-100/50 -z-10"
                 />
               </span> of <br />
               <span className="italic font-serif">STEM</span> in Egypt.
@@ -172,14 +179,14 @@ export default function Home() {
             
             {/* 1. Rodina Promo */}
             <div className="snap-start shrink-0 w-[320px] bg-white rounded-[32px] p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col items-center text-center relative overflow-hidden group transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] cursor-default">
-              <div className="absolute top-0 w-full h-2 bg-gradient-to-r from-teal-400 to-cyan-400" />
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-teal-400 via-emerald-500 to-cyan-400 mb-5 flex items-center justify-center text-white font-bold text-2xl shadow-xl shadow-emerald-500/20 group-hover:scale-110 transition-transform duration-300">RM</div>
-              <span className="px-3 py-1.5 bg-emerald-50 text-emerald-600 rounded-xl text-[10px] font-black tracking-wider uppercase mb-4 shadow-sm border border-emerald-100 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+              <div className="absolute top-0 w-full h-2 bg-brand-purple" />
+              <div className="w-20 h-20 rounded-full bg-brand-purple mb-5 flex items-center justify-center text-white font-bold text-2xl shadow-xl shadow-brand-purple/20 group-hover:scale-110 transition-transform duration-300">RM</div>
+              <span className="px-3 py-1.5 bg-purple-50 text-brand-purple rounded-xl text-[10px] font-black tracking-wider uppercase mb-4 shadow-sm border border-purple-100 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-purple animate-ping"></span>
                 SPECIAL PROMOTION
               </span>
               <h3 className="text-xl font-black text-slate-800 mb-1">{PROMOTED_LEADER.name}</h3>
-              <p className="text-emerald-500 font-bold text-sm bg-emerald-50 px-3 py-1 rounded-full mt-2">Head of PR</p>
+              <p className="text-brand-purple font-bold text-sm bg-purple-50 px-3 py-1 rounded-full mt-2">Head of PR</p>
             </div>
 
             {/* Loop Best Members */}
@@ -221,16 +228,25 @@ export default function Home() {
             className="w-full relative min-h-[320px] flex items-center rounded-[40px] bg-brand-purple overflow-hidden shadow-xl p-8 md:p-12 group"
           >
             {/* Subtle overlay for depth */}
-            <div className="absolute inset-0 bg-black/5" />
+            <div className="absolute inset-0 bg-white/[0.03]" />
 
             <div className="flex flex-col items-start text-left max-w-3xl w-full relative z-10" dir="ltr">
               
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-[10px] font-bold text-white mb-6 uppercase tracking-wider shadow-lg">
                 <div className="relative flex h-2 w-2 shrink-0">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                  {isEventPassed ? (
+                    <>
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                    </>
+                  )}
                 </div>
-                <span>FEATURED ANNUAL EVENT — MASAR CAIRO 2026</span>
+                <span>{isEventPassed ? "CONCLUDED — MASAR CAIRO 2026" : "FEATURED ANNUAL EVENT — MASAR CAIRO 2026"}</span>
               </div>
               
               <h3 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-none mb-4 text-left">
@@ -287,29 +303,41 @@ export default function Home() {
                   className="w-full sm:w-auto px-10 py-4 bg-white text-brand-purple hover:text-red-600 rounded-2xl font-black text-base transition-all duration-250 hover:scale-[1.03] active:scale-95 shadow-xl text-center flex items-center justify-center gap-2 group/btn relative overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center gap-2">
-                    Register Now
+                    {isEventPassed ? "Stay Updated" : "Register Now"}
                     <ArrowRight size={18} className="text-brand-purple group-hover/btn:text-red-600 group-hover/btn:translate-x-1 transition-all" />
                   </span>
                 </a>
 
                 {/* Living premium countdown widget */}
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    { label: "D", val: timeLeft.days },
-                    { label: "H", val: timeLeft.hours },
-                    { label: "M", val: timeLeft.minutes },
-                    { label: "S", val: timeLeft.seconds },
-                  ].map((unit, idx) => (
-                    <div key={idx} className="flex flex-col items-center bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-3 py-2 min-w-[60px] relative overflow-hidden">
-                      <span className="block text-xl font-black text-white font-mono tracking-tight leading-none relative z-10">
-                        {String(unit.val).padStart(2, '0')}
-                      </span>
-                      <span className="block text-[9px] uppercase font-bold tracking-widest text-white/70 mt-1 font-sans relative z-10">
-                        {unit.label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+                {isEventPassed ? (
+                  <div className="flex items-center gap-3 px-5 py-3.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-emerald-400 shadow-lg shadow-emerald-500/5">
+                    <span className="relative flex h-2.5 w-2.5 shrink-0">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
+                    </span>
+                    <span className="text-sm font-black tracking-tight text-white leading-tight">
+                      Event Concluded Successfully! Stay Tuned for MASAR 2027 🚀
+                    </span>
+                  </div>
+                ) : (
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      { label: "D", val: timeLeft.days },
+                      { label: "H", val: timeLeft.hours },
+                      { label: "M", val: timeLeft.minutes },
+                      { label: "S", val: timeLeft.seconds },
+                    ].map((unit, idx) => (
+                      <div key={idx} className="flex flex-col items-center bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-3 py-2 min-w-[60px] relative overflow-hidden">
+                        <span className="block text-xl font-black text-white font-mono tracking-tight leading-none tabular-nums relative z-10">
+                          {String(unit.val).padStart(2, '0')}
+                        </span>
+                        <span className="block text-[9px] uppercase font-bold tracking-widest text-white/70 mt-1 font-sans relative z-10">
+                          {unit.label}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
             </div>
@@ -366,4 +394,4 @@ export default function Home() {
       </section>
     </div>
   );
-                                }
+                }
