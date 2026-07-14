@@ -51,28 +51,18 @@ export default function STEMCompanion() {
     return typeof window !== "undefined" && !!(window as any).__preloaderFinished;
   });
   const [isSleeping, setIsSleeping] = useState(() => {
-    if (typeof window !== "undefined") {
-      const hasVisited = localStorage.getItem("has_visited_companion");
-      if (hasVisited) {
-        return true;
-      }
-      localStorage.setItem("has_visited_companion", "true");
-    }
-    return false;
+    return true; // Always start asleep in the pocket for all users (absolutely 100% of the time)
   });
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  // Modes: "hidden" | "dropping" | "normal" | "sleeping" | "wakeup" | "sleeping_entry"
-  const currentMode = useRef<"hidden" | "dropping" | "normal" | "sleeping" | "wakeup" | "sleeping_entry">("hidden");
+  // Modes: "hidden" | "normal" | "sleeping" | "wakeup" | "sleeping_entry"
+  const currentMode = useRef<"hidden" | "normal" | "sleeping" | "wakeup" | "sleeping_entry">("hidden");
 
   // Track the wakeup countdown/frame timer
   const wakeupTimer = useRef(0);
 
   // Track the sleep entry countdown/frame timer
   const sleepEntryTimer = useRef(0);
-
-  // Track continuous frames inside the dropping mode
-  const spawnTimer = useRef(0);
 
   // Custom arrays for crying/sad tear pixels
   const tearsRef = useRef<{ x: number; y: number; vy: number; alpha: number; speed: number }[]>([]);
@@ -87,10 +77,10 @@ export default function STEMCompanion() {
   const spiderScale = useRef(0.76);
 
   // Core physics references (no React re-renders to ensure 100% buttery smoothness)
-  const isSleepingInit = typeof window !== "undefined" && !!localStorage.getItem("has_visited_companion");
-  const spiderPos = useRef(isSleepingInit ? { x: 65, y: 105 } : { x: window.innerWidth / 2, y: window.innerHeight * 0.45 }); // Start centered inside screen for breakout digging or inside pocket
-  const spiderTarget = useRef(isSleepingInit ? { x: 65, y: 105 } : { x: window.innerWidth / 2, y: window.innerHeight / 2 });
-  const lagTarget = useRef(isSleepingInit ? { x: 65, y: 105 } : { x: window.innerWidth / 2, y: window.innerHeight / 2 }); // Lag target for 200-500ms smooth organic delay
+  // Starts directly inside the cozy spider pocket on coordinates { x: 65, y: 105 }
+  const spiderPos = useRef({ x: 65, y: 105 }); 
+  const spiderTarget = useRef({ x: 65, y: 105 });
+  const lagTarget = useRef({ x: 65, y: 105 }); 
   
   const spiderAngle = useRef(0);
   const spiderVel = useRef({ x: 0, y: 0 });
@@ -127,20 +117,11 @@ export default function STEMCompanion() {
   // Coordinate our spawn precisely with the preloader
   useEffect(() => {
     const isDone = !!(window as any).__preloaderFinished;
-    const isSleepingInit = typeof window !== "undefined" && !!localStorage.getItem("has_visited_companion");
     if (isDone) {
       setIsPreloaderFinished(true);
       if (currentMode.current === "hidden") {
-        if (isSleepingInit) {
-          currentMode.current = "sleeping";
-          spiderPos.current = { x: 65, y: 105 };
-          spiderTarget.current = { x: 65, y: 105 };
-          lagTarget.current = { x: 65, y: 105 };
-        } else {
-          currentMode.current = "dropping";
-          spawnTimer.current = 50;
-          spiderPos.current = { x: window.innerWidth / 2, y: -120 };
-        }
+        currentMode.current = "sleeping";
+        spiderPos.current = { x: 65, y: 105 };
       }
     }
 
@@ -148,18 +129,9 @@ export default function STEMCompanion() {
       // Delay slightly by 700ms to allow the preloader transition blur/fadeout to completely clear!
       setTimeout(() => {
         setIsPreloaderFinished(true);
-        const isSleepingInitSub = typeof window !== "undefined" && !!localStorage.getItem("has_visited_companion");
         if (currentMode.current === "hidden") {
-          if (isSleepingInitSub) {
-            currentMode.current = "sleeping";
-            spiderPos.current = { x: 65, y: 105 };
-            spiderTarget.current = { x: 65, y: 105 };
-            lagTarget.current = { x: 65, y: 105 };
-          } else {
-            currentMode.current = "dropping";
-            spawnTimer.current = 50; // loftier and clearer drop!
-            spiderPos.current = { x: window.innerWidth / 2, y: -120 };
-          }
+          currentMode.current = "sleeping";
+          spiderPos.current = { x: 65, y: 105 };
         }
       }, 700);
     };
@@ -171,20 +143,11 @@ export default function STEMCompanion() {
       if (!!(window as any).__preloaderFinished) {
         clearInterval(pollInterval);
         setIsPreloaderFinished(true);
-        const isSleepingInitSub = typeof window !== "undefined" && !!localStorage.getItem("has_visited_companion");
         if (currentMode.current === "hidden") {
           // Delay briefly for fallback as well to sync beautifully
           setTimeout(() => {
-            if (isSleepingInitSub) {
-              currentMode.current = "sleeping";
-              spiderPos.current = { x: 65, y: 105 };
-              spiderTarget.current = { x: 65, y: 105 };
-              lagTarget.current = { x: 65, y: 105 };
-            } else {
-              currentMode.current = "dropping";
-              spawnTimer.current = 50;
-              spiderPos.current = { x: window.innerWidth / 2, y: -120 };
-            }
+            currentMode.current = "sleeping";
+            spiderPos.current = { x: 65, y: 105 };
           }, 700);
         }
       }
@@ -193,17 +156,9 @@ export default function STEMCompanion() {
     // Unconditional safety timeout: force spawn after 10 seconds absolute max
     const safetyTimeout = setTimeout(() => {
       setIsPreloaderFinished(true);
-      const isSleepingInitSub = typeof window !== "undefined" && !!localStorage.getItem("has_visited_companion");
       if (currentMode.current === "hidden") {
-        if (isSleepingInitSub) {
-          currentMode.current = "sleeping";
-          spiderPos.current = { x: 65, y: 105 };
-          spiderTarget.current = { x: 65, y: 105 };
-          lagTarget.current = { x: 65, y: 105 };
-        } else {
-          currentMode.current = "dropping";
-          spawnTimer.current = 50;
-        }
+        currentMode.current = "sleeping";
+        spiderPos.current = { x: 65, y: 105 };
       }
     }, 10000);
 
@@ -516,7 +471,7 @@ export default function STEMCompanion() {
         const sleepX = 65; // Underneath logo top-left
         const sleepY = 105;
 
-        const scaleFactor = 0.76; // Default scale is reduced to 75% size to avoid clutter!
+        const scaleFactor = 0.46; // Default scale is reduced to 46% size to be cute and unobtrusive!
 
         // 1. DOM SCANNING FOR CURIOUS CLUSTERS (Throttled perfectly to every 2 seconds)
         const nowTime = Date.now();
@@ -592,9 +547,6 @@ export default function STEMCompanion() {
           // Smoothly scale up from sleeping scale
           const climbProgress = (65 - wakeupTimer.current) / 35; // 0 to 1
           targetScale = scaleFactor * (0.82 + climbProgress * 0.18);
-        } else if (currentMode.current === "dropping") {
-          const spawnProgress = Math.min(1.0, (50 - spawnTimer.current) / 50);
-          targetScale = scaleFactor * (0.4 + spawnProgress * 0.6);
         }
         spiderScale.current += (targetScale - spiderScale.current) * 0.10;
 
@@ -714,6 +666,8 @@ export default function STEMCompanion() {
           if (currentMode.current !== "sleeping" && currentMode.current !== "sleeping_entry") {
             currentMode.current = "sleeping_entry";
             sleepEntryTimer.current = 80;
+            // Guide back to pocket quickly
+            spiderTarget.current = { x: sleepX, y: sleepY };
           }
         } else if (currentMode.current === "sleeping" || currentMode.current === "sleeping_entry") {
           currentMode.current = "wakeup";
@@ -734,56 +688,7 @@ export default function STEMCompanion() {
         }
 
         // Handle custom modes
-        if (currentMode.current === "dropping") {
-          spawnTimer.current--;
-          hoverInteractivityRef.current = null;
-
-          const idealTargetX = window.innerWidth / 2;
-          const idealTargetY = window.innerHeight * 0.35;
-
-          // Elegant physical elastic bounce with 50 frames
-          const progress = Math.min(1.0, (50 - spawnTimer.current) / 50);
-          const elastic = 1.0 - Math.cos(progress * Math.PI * 1.5) * Math.exp(-progress * 3.5);
-          
-          sp.x = idealTargetX;
-          sp.y = -120 + (idealTargetY - (-120)) * elastic;
-          spiderAngle.current = Math.PI / 2; // Face downwards while descending
-
-          if (Math.random() < 0.45) {
-            dustRef.current.push({
-              x: sp.x + (Math.random() * 12 - 6),
-              y: sp.y + 10,
-              alpha: 1.0,
-              color: Math.random() > 0.5 ? "#10b981" : "#a855f7",
-              size: 1.0 + Math.random() * 1.5
-            });
-          }
-
-          // Trigger complete land stabilization
-          if (spawnTimer.current <= 0) {
-            currentMode.current = "normal";
-            
-            for (let s = 0; s < 15; s++) {
-              dustRef.current.push({
-                x: sp.x,
-                y: sp.y,
-                alpha: 0.95,
-                color: s % 2 === 0 ? "#10b981" : "#a855f7",
-                size: 1.5 + Math.random() * 2.0
-              });
-            }
-            
-            // Outer ripple on land!
-            rippleRef.current = {
-              x: sp.x,
-              y: sp.y,
-              radius: 3,
-              maxRadius: 75,
-              alpha: 0.9,
-              color: "#10b981"
-            };
-          }
-        } else if (currentMode.current === "sleeping") {
+        if (currentMode.current === "sleeping") {
           hoverInteractivityRef.current = null; 
           
           tg.x = sleepX + shakeX;
@@ -890,8 +795,8 @@ export default function STEMCompanion() {
         const distance = Math.hypot(dx, dy);
 
         const isShooting = isWebShooting.current;
-        let attractionForce = isShooting ? 0.35 : (currentMode.current === "dropping" ? 0.0 : 0.07);
-        let maxSpeed = isShooting ? 30 : (currentMode.current === "dropping" ? 0 : 13.5); // Smoother, lighter movement limits
+        let attractionForce = isShooting ? 0.35 : 0.07;
+        let maxSpeed = isShooting ? 30 : 13.5; // Smoother, lighter movement limits
 
         if (currentMode.current === "wakeup") {
           if (wakeupTimer.current > 30) {
@@ -908,8 +813,6 @@ export default function STEMCompanion() {
             sp.x += vl.x;
             sp.y += vl.y;
           }
-        } else if (currentMode.current === "dropping") {
-          // Managed in state dropping block
         } else if (distance > (currentMode.current === "sleeping" ? 2 : 10)) {
           vl.x += dx * attractionForce;
           vl.y += dy * attractionForce;
@@ -929,7 +832,7 @@ export default function STEMCompanion() {
           sp.y += vl.y;
 
           // Body rotation alignment
-          if (currentMode.current !== "dropping" && currentMode.current !== "sleeping") {
+          if (currentMode.current !== "sleeping") {
             const targetAngle = Math.atan2(dy, dx);
             let diff = targetAngle - spiderAngle.current;
             while (diff < -Math.PI) diff += Math.PI * 2;
@@ -993,21 +896,7 @@ export default function STEMCompanion() {
           return sleepY + sY;
         }
 
-        // 5. DRAW CLIMB SEED LINE (while spawning)
-        if (currentMode.current === "dropping") {
-          ctx.save();
-          ctx.beginPath();
-          ctx.moveTo(sp.x, 0);
-          ctx.lineTo(sp.x, sp.y - 10);
-          ctx.strokeStyle = "rgba(168, 85, 247, 0.45)"; 
-          ctx.lineWidth = 1.2;
-          ctx.stroke();
-
-          ctx.strokeStyle = "rgba(6, 182, 212, 0.7)"; 
-          ctx.lineWidth = 0.55;
-          ctx.stroke();
-          ctx.restore();
-        }
+        // 5. REMOVED CLIMB SEED LINE (Always clean nest startup)
 
         // 6. DRAW COZY DIGITAL COMPANION COCOON BASE (Under Logo navbar element)
         ctx.save();
@@ -1686,4 +1575,4 @@ export default function STEMCompanion() {
       </div>
     </>
   );
-        }
+            }
