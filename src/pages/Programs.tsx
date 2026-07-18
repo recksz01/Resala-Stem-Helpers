@@ -52,41 +52,43 @@ export default function Programs() {
         >
           <span className="text-red-500 font-bold uppercase tracking-[0.4em] text-xs">Our Expertise</span>
           <h1 className="text-5xl md:text-7xl font-black text-brand-purple mt-6 mb-8">What We Do</h1>
-          <p className="text-xl text-slate-600 leading-relaxed">
+          <p className="text-lg text-slate-400 font-light leading-relaxed">
             We offer comprehensive educational activities designed to bridge the gap between theory and practice, inspiring the next generation of innovators in Egypt.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
+        {/* تم تغيير md:flex-row إلى lg:flex-row و md:w-2/5 إلى lg:w-2/5 لضمان مظهر متناسق ومريح للتابلت في الوضع الرأسي */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
           {programs.map((program, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              whileHover={{ rotate: idx % 2 === 0 ? -1 : 1 }}
-              className="group flex flex-col md:flex-row bg-white/80 backdrop-blur-xl rounded-[3rem] overflow-hidden border border-white shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 text-left"
+              whileHover={{ y: -5 }}
+              className="group flex flex-col lg:flex-row glass-dark rounded-[2.5rem] overflow-hidden border border-white/5 shadow-2xl hover:shadow-brand-purple/10 transition-all duration-500 text-left"
             >
-              <div className="md:w-2/5 relative h-64 md:h-auto overflow-hidden">
+              <div className="lg:w-2/5 shrink-0 relative h-64 lg:h-auto overflow-hidden">
                 <img 
                   src={program.image} 
                   alt={program.title}
-                  className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                  className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
                   referrerPolicy="no-referrer"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-brand-bg/90 mix-blend-multiply" />
               </div>
-              <div className="flex-1 p-10 md:p-12">
-                <div className={`w-14 h-14 rounded-2xl ${program.color} flex items-center justify-center mb-8 shadow-xl`}>
-                  <program.icon size={28} />
+              <div className="flex-1 p-8 md:p-10">
+                <div className={`w-12 h-12 rounded-2xl ${program.color} flex items-center justify-center mb-6 border border-white/5`}>
+                  <program.icon size={24} />
                 </div>
-                <h3 className="text-3xl font-black text-brand-purple mb-4">{program.title}</h3>
-                <p className="text-slate-600 leading-relaxed mb-8">{program.desc}</p>
+                <h3 className="text-2xl font-bold text-white mb-4">{program.title}</h3>
+                <p className="text-slate-400 font-light leading-relaxed mb-8">{program.desc}</p>
                 <Link 
                   to="/register" 
-                  className="inline-flex items-center gap-2 px-8 py-3 bg-red-500 text-white rounded-full font-black hover:bg-red-600 hover:shadow-lg hover:shadow-red-500/30 transition-all active:scale-95 text-sm uppercase tracking-widest"
+                  className="inline-flex items-center gap-2 text-brand-purple-glow font-medium hover:text-white transition-colors group/link"
                 >
-                  Join Program <ArrowRight size={18} />
+                  Join Program <ArrowRight size={18} className="group-hover/link:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </motion.div>
