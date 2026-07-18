@@ -53,7 +53,8 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 group relative">
-          <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center p-0.5 border border-white/10 group-hover:border-white/30 transition-colors shadow-lg overflow-hidden relative">
+          {/* تم إضافة shrink-0 لمنع انكماش اللوجو على التابلت */}
+          <div className="w-12 h-12 shrink-0 bg-white/5 rounded-2xl flex items-center justify-center p-0.5 border border-white/10 group-hover:border-white/30 transition-colors shadow-lg overflow-hidden relative">
             <div className="w-full h-full bg-slate-900 rounded-xl flex items-center justify-center relative overflow-hidden">
               <img 
                 src="/logo-internal.png" 
@@ -86,12 +87,13 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
+        {/* تم تحسين المسافات وحجم الخط للأجهزة المتوسطة والشاشات الكبيرة */}
+        <div className="hidden md:flex items-center gap-4 lg:gap-8">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               to={link.href}
-              className={`text-sm font-black uppercase tracking-widest transition-all relative group ${
+              className={`text-xs lg:text-sm font-black uppercase tracking-widest transition-all relative group ${
                 location.pathname === link.href
                   ? "text-red-400"
                   : scrolled || !isHome
@@ -132,7 +134,7 @@ export default function Navbar() {
             </div>
             <Link
               to="/register"
-              className={`px-6 py-3 rounded-full text-sm font-black uppercase tracking-widest transition-all active:scale-95 shadow-xl hover:-translate-y-0.5 ${
+              className={`px-6 py-3 rounded-full text-xs lg:text-sm font-black uppercase tracking-widest transition-all active:scale-95 shadow-xl hover:-translate-y-0.5 ${
                 scrolled || !isHome 
                 ? "bg-white text-brand-purple hover:bg-slate-50" 
                 : "bg-red-500 text-white hover:bg-red-600 shadow-red-500/20"
@@ -182,4 +184,4 @@ export default function Navbar() {
       </motion.div>
     </motion.nav>
   );
-                }
+        }
