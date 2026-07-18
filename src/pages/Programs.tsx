@@ -57,8 +57,7 @@ export default function Programs() {
           </p>
         </motion.div>
 
-        {/* تم تغيير التقسيم هنا ليكون lg:grid-cols-2 لمنع الازدحام على التابلت بالوضع الرأسي */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
           {programs.map((program, idx) => (
             <motion.div
               key={idx}
@@ -67,13 +66,11 @@ export default function Programs() {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
               whileHover={{ rotate: idx % 2 === 0 ? -1 : 1 }}
-              {/* تم تغيير التخطيط الأفقي ليصبح نشطاً على أجهزة lg فما فوق لحماية الصور من الاختفاء والانكماش */}
-              className="group flex flex-col lg:flex-row bg-white/80 backdrop-blur-xl rounded-[3rem] overflow-hidden border border-white shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 text-left"
+              className="group flex flex-col md:flex-row bg-white/80 backdrop-blur-xl rounded-[3rem] overflow-hidden border border-white shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 text-left"
             >
-              {/* تم تعديل عرض ومساحة الصورة لتظهر بالكامل وبشكل مذهل */}
-              <div className="lg:w-2/5 shrink-0 relative h-64 lg:h-auto overflow-hidden">
-                <img 
-                  src={program.image} 
+              <div className="md:w-2/5 relative h-64 md:h-auto overflow-hidden">
+                <img
+                  src={program.image}
                   alt={program.title}
                   className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
                   referrerPolicy="no-referrer"
@@ -85,8 +82,8 @@ export default function Programs() {
                 </div>
                 <h3 className="text-3xl font-black text-brand-purple mb-4">{program.title}</h3>
                 <p className="text-slate-600 leading-relaxed mb-8">{program.desc}</p>
-                <Link 
-                  to="/register" 
+                <Link
+                  to="/register"
                   className="inline-flex items-center gap-2 px-8 py-3 bg-red-500 text-white rounded-full font-black hover:bg-red-600 hover:shadow-lg hover:shadow-red-500/30 transition-all active:scale-95 text-sm uppercase tracking-widest"
                 >
                   Join Program <ArrowRight size={18} />
@@ -98,4 +95,4 @@ export default function Programs() {
       </div>
     </PageLayout>
   );
-              }
+        }
